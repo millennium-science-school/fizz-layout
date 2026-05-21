@@ -21,10 +21,4 @@ export default antfu(
     },
     files: ['**/*.vue'],
   },
-  {
-    rules: {
-      'pnpm/yaml-enforce-settings': 'off',
-    },
-    files: ['**/*.yaml', '**/*.yml'],
-  },
 )

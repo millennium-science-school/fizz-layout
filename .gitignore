@@ -24,7 +24,6 @@ dist-ssr
 *.sln
 *.sw?
 
-pnpm-lock.yaml
 docs/.vitepress/cache
 dist.zip
 **/test.*

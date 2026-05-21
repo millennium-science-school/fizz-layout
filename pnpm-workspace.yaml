@@ -4,8 +4,8 @@ publicHoistPattern:
   - '@vueuse/*'
 
 shellEmulator: true
+trustPolicy: no-downgrade
 
-trustPolicy: off
 packages:
   - packages/**
   - play
