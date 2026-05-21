@@ -1,0 +1,41 @@
+// ========================================
+// 半深色主题共享 Mixin
+// ========================================
+// 提取 Header 和 Sidebar 半深色主题的公共变量覆盖，
+// 避免在 _header.scss 和 _sidebar.scss 中重复定义。
+//
+// 用法：
+//   .fizz-layout-header.header-semi-dark { @include semi-dark-theme; }
+//   .fizz-layout-sidebar.sidebar-semi-dark { @include semi-dark-theme; }
+
+@mixin semi-dark-theme($bg: #001529) {
+  // 覆盖全局 fizz 变量，使子组件自动应用深色风格
+  --fizz-bg-color: #{$bg};
+  --fizz-text-color-primary: rgba(255, 255, 255, 0.85);
+  --fizz-text-color-regular: rgba(255, 255, 255, 0.75);
+  --fizz-text-color-secondary: rgba(255, 255, 255, 0.65);
+  --fizz-text-color-placeholder: rgba(255, 255, 255, 0.4);
+  --fizz-border-color-light: rgba(255, 255, 255, 0.1);
+  --fizz-color-primary-light: rgba(255, 255, 255, 0.1);
+
+  // Element Plus 通用变量覆盖（使依赖 --el-* 的子组件可见）
+  --el-text-color-primary: rgba(255, 255, 255, 0.85);
+  --el-text-color-regular: rgba(255, 255, 255, 0.75);
+  --el-text-color-secondary: rgba(255, 255, 255, 0.65);
+  --el-text-color-placeholder: rgba(255, 255, 255, 0.4);
+  --el-border-color: rgba(255, 255, 255, 0.2);
+  --el-border-color-lighter: rgba(255, 255, 255, 0.12);
+  --el-fill-color: rgba(255, 255, 255, 0.12);
+  --el-fill-color-light: rgba(255, 255, 255, 0.08);
+  --el-fill-color-darker: rgba(255, 255, 255, 0.18);
+  --el-color-primary-light-7: rgba(64, 158, 255, 0.3);
+
+  // 菜单变量覆盖
+  --fizz-menu-text-color: rgba(255, 255, 255, 0.85);
+  --fizz-menu-text-color-secondary: rgba(255, 255, 255, 0.65);
+  --fizz-menu-hover-bg: rgba(255, 255, 255, 0.1);
+  --fizz-menu-hover-color: #fff;
+  --fizz-menu-active-bg: rgba(64, 158, 255, 0.3);
+  --fizz-menu-active-color: #fff;
+  --fizz-menu-submenu-active-bg: rgba(64, 158, 255, 0.2);
+}

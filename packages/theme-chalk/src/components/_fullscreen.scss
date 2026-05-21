@@ -1,0 +1,10 @@
+// ========================================
+// Fullscreen 全屏切换组件样式
+// ========================================
+
+@use '../config/namespace' as *;
+@use '../mixins/components' as *;
+
+.#{$fizz-ns}-fullscreen {
+  @include widget-button;
+}

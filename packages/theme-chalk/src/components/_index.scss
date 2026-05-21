@@ -1,0 +1,28 @@
+// ========================================
+// Components 组件样式入口
+// ========================================
+
+// Layout 布局组件
+@use 'layout';
+@use 'header';
+@use 'sider';
+@use 'footer';
+@use 'container';
+
+// Menu 菜单组件
+@use 'menu';
+
+// Tabs 标签页组件
+@use 'tabs';
+@use 'tab-chrome';
+@use 'context-menu';
+
+// 功能组件
+@use 'breadcrumb';
+@use 'icon';
+@use 'appearance';
+@use 'translation';
+@use 'notification';
+@use 'global-search';
+@use 'user-dropdown';
+@use 'fullscreen';

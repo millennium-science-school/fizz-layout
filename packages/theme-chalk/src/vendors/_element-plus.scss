@@ -1,0 +1,58 @@
+// ========================================
+// Element Plus 样式覆盖
+// ========================================
+
+@use '../config/namespace' as *;
+@use '../config/vars' as *;
+@use '../mixins/layout' as *;
+
+// ========== 全局覆盖 ==========
+
+// ========== 下拉菜单优化 ==========
+.#{$el-ns}-dropdown-menu {
+  padding: 4px;
+  border-radius: $radius-md;
+
+  &__item {
+    border-radius: $radius-sm;
+    padding: 8px 12px;
+
+    &:hover {
+      background-color: var(--fizz-color-primary-light);
+    }
+
+    &.is-disabled {
+      opacity: 0.5;
+    }
+  }
+}
+
+// ========== 暗色模式 Popper 覆盖 ==========
+html.dark,
+.dark {
+  // Dropdown 菜单暗色模式
+  .#{$el-ns}-dropdown-menu {
+    background-color: var(--#{$el-ns}-bg-color-overlay);
+    border-color: var(--#{$el-ns}-border-color-light);
+
+    &__item {
+      color: var(--#{$el-ns}-text-color-regular);
+
+      &:not(.is-disabled):hover,
+      &:not(.is-disabled):focus {
+        background-color: rgba(255, 255, 255, 0.08);
+        color: var(--#{$el-ns}-text-color-primary);
+      }
+
+      &.is-active {
+        color: var(--fizz-color-primary);
+      }
+    }
+  }
+
+  // Popover 暗色模式
+  .#{$el-ns}-popover.#{$el-ns}-popper {
+    background: var(--#{$el-ns}-bg-color-overlay);
+    border-color: var(--#{$el-ns}-border-color-light);
+  }
+}

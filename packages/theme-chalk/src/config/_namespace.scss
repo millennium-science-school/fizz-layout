@@ -1,0 +1,45 @@
+// ========================================
+// Namespace 命名空间配置
+// ========================================
+
+// Fizz 组件前缀
+$fizz-ns: 'fizz' !default;
+
+// Element Plus 前缀（用于覆盖第三方样式）
+$el-ns: 'el' !default;
+
+// 生成组件类名
+// @param {String} $component - 组件名
+// @return {String} - 完整类名
+@function fizz-class($component) {
+  @return '.#{$fizz-ns}-#{$component}';
+}
+
+// BEM 命名辅助
+// Block
+@mixin b($block) {
+  .#{$fizz-ns}-#{$block} {
+    @content;
+  }
+}
+
+// Element
+@mixin e($element) {
+  &__#{$element} {
+    @content;
+  }
+}
+
+// Modifier
+@mixin m($modifier) {
+  &--#{$modifier} {
+    @content;
+  }
+}
+
+// State
+@mixin when($state) {
+  &.is-#{$state} {
+    @content;
+  }
+}

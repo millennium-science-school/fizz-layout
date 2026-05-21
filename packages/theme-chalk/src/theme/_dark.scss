@@ -1,0 +1,48 @@
+// ========================================
+// 深色主题样式
+// ========================================
+
+@use '../config/namespace' as *;
+
+// 深色菜单公共变量
+@mixin dark-menu-vars {
+  --menu-item-color: hsl(210 40% 98% / 80%);
+  --menu-item-hover-color: hsl(210 40% 98%);
+  --menu-item-hover-background-color: hsl(217.2 32.6% 17.5%);
+  --menu-item-active-color: hsl(210 40% 98%);
+  --menu-item-active-background-color: hsl(217.2 32.6% 17.5%);
+  --menu-submenu-hover-color: hsl(210 40% 98%);
+  --menu-submenu-hover-background-color: hsl(217.2 32.6% 17.5%);
+  --menu-submenu-active-color: hsl(210 40% 98%);
+  --menu-submenu-active-background-color: hsl(217.2 32.6% 17.5%);
+}
+
+// 深色菜单主题
+.#{$fizz-ns}-menu {
+  &.is-dark {
+    @include dark-menu-vars;
+  }
+}
+
+// 深色菜单弹出容器
+.#{$fizz-ns}-menu__popup-container.is-dark {
+  @include dark-menu-vars;
+
+  --fizz-bg-color-overlay: hsl(222.2 84% 4.9%);
+  --fizz-border-color: hsl(217.2 32.6% 17.5%);
+}
+
+// 深色侧边栏主题（独立于暗色模式）
+.sidebar-dark,
+.menu-dark {
+  --menu-item-color: rgba(255, 255, 255, 0.65);
+  --menu-item-background-color: transparent;
+  --menu-item-hover-color: #ffffff;
+  --menu-item-hover-background-color: rgba(64, 158, 255, 0.2);
+  --menu-item-active-color: #ffffff;
+  --menu-item-active-background-color: var(--fizz-color-primary);
+  --menu-submenu-hover-color: #ffffff;
+  --menu-submenu-hover-background-color: rgba(64, 158, 255, 0.2);
+  --menu-submenu-active-color: #ffffff;
+  --menu-submenu-active-background-color: rgba(64, 158, 255, 0.2);
+}

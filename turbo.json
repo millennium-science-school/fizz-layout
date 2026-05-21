@@ -1,0 +1,61 @@
+{
+  "$schema": "https://turbo.build/schema.json",
+  "tasks": {
+    "build": {
+      "dependsOn": ["^build"],
+      "outputs": ["dist/**"]
+    },
+
+    "//#build:layout": {
+      "inputs": [
+        "packages/layout/**",
+        "packages/components/**",
+        "packages/hooks/**",
+        "packages/locale/**",
+        "tsconfig*.json"
+      ],
+      "outputs": ["dist/es/**", "dist/types/**"]
+    },
+
+    "//#build:locale": {
+      "inputs": [
+        "packages/locale/**",
+        "tsconfig*.json"
+      ],
+      "outputs": ["dist/locale/**"]
+    },
+
+    "//#build:css": {
+      "dependsOn": ["//#build:layout"],
+      "inputs": [
+        "packages/theme-chalk/**",
+        "scripts/build-css.mjs"
+      ],
+      "outputs": ["dist/es/index.css", "dist/es/index.expanded.css", "dist/theme-chalk/**"]
+    },
+
+    "//#build:release": {
+      "dependsOn": ["//#build:layout", "//#build:locale", "//#build:css"],
+      "inputs": ["scripts/**"],
+      "outputs": ["dist/package.json", "dist/README.md"]
+    },
+
+    "//#lint:package": {
+      "dependsOn": ["//#build:release"],
+      "inputs": [],
+      "outputs": []
+    },
+
+    "lint": {
+      "outputs": []
+    },
+
+    "test": {
+      "outputs": []
+    },
+
+    "dev": {
+      "cache": false
+    }
+  }
+}

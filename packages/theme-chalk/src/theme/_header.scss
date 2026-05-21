@@ -1,0 +1,20 @@
+// ========================================
+// Header 半深色主题
+// ========================================
+// 仅在浅色模式下使用 .header-semi-dark 类
+// 默认(light/dark)跟随全局 --fizz-* 变量，无需额外类名
+
+@use '../config/namespace' as *;
+@use 'semi-dark' as *;
+
+// ========== 半深色主题（浅色模式下的深色 Header）==========
+.#{$fizz-ns}-layout-header.header-semi-dark {
+  @include semi-dark-theme;
+
+  // Element Plus 按钮样式补充（hover 背景）
+  --el-button-hover-bg-color: rgba(255, 255, 255, 0.1);
+
+  // Element Plus 面包屑变量覆盖
+  --el-breadcrumb-text-color: rgba(255, 255, 255, 0.65);
+  --el-breadcrumb-separator-color: rgba(255, 255, 255, 0.4);
+}

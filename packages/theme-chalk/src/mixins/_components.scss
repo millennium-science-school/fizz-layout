@@ -1,0 +1,120 @@
+// ========================================
+// 组件相关 Mixins
+// ========================================
+
+@use '../config/vars' as *;
+@use 'layout' as *;
+
+// 按钮基础样式
+@mixin button-base {
+  @include flex-center;
+  cursor: pointer;
+  user-select: none;
+  border: none;
+  outline: none;
+  background: transparent;
+  transition: all $transition-duration $transition-timing;
+
+  &:focus {
+    outline: none;
+  }
+}
+
+// 可点击元素
+@mixin clickable {
+  cursor: pointer;
+  user-select: none;
+  transition: all $transition-duration $transition-timing;
+
+  &:active {
+    transform: scale(0.95);
+  }
+}
+
+// 悬停效果
+@mixin hover-highlight($bg-color: var(--fizz-color-primary-light)) {
+  &:hover {
+    background-color: $bg-color;
+  }
+}
+
+// 激活效果
+@mixin active-highlight($color: var(--fizz-color-primary)) {
+  &.is-active {
+    color: $color;
+  }
+}
+
+// 禁用状态
+@mixin disabled {
+  &.is-disabled,
+  &:disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
+    pointer-events: none;
+  }
+}
+
+// Widget 按钮（Header 小部件）
+@mixin widget-button($size: 32px) {
+  @include flex-center;
+  @include square($size);
+  padding: 0;
+  font-size: 16px;
+  color: var(--fizz-text-color-regular);
+  cursor: pointer;
+  background-color: transparent;
+  border: none;
+  border-radius: $radius-sm;
+  transition: all $transition-duration;
+
+  &:hover {
+    color: var(--fizz-color-primary);
+    background-color: var(--fizz-color-primary-light);
+  }
+
+  &:active {
+    transform: scale(0.95);
+  }
+}
+
+// 卡片样式
+@mixin card($radius: $radius-md, $shadow: $shadow-base) {
+  background-color: var(--fizz-bg-color);
+  border-radius: $radius;
+  box-shadow: $shadow;
+}
+
+// 弹出层样式
+@mixin popup($radius: $radius-md) {
+  background-color: var(--fizz-bg-color-overlay);
+  border: 1px solid var(--fizz-border-color);
+  border-radius: $radius;
+  box-shadow: $shadow-lg;
+}
+
+// 分隔线
+@mixin divider($direction: 'horizontal', $color: var(--fizz-border-color)) {
+  @if $direction == 'horizontal' {
+    border-top: 1px solid $color;
+  } @else {
+    border-left: 1px solid $color;
+  }
+}
+
+// 表单控件焦点样式
+@mixin focus-ring($color: var(--fizz-color-primary)) {
+  &:focus {
+    outline: 2px solid $color;
+    outline-offset: 2px;
+  }
+
+  &:focus:not(:focus-visible) {
+    outline: none;
+  }
+
+  &:focus-visible {
+    outline: 2px solid $color;
+    outline-offset: 2px;
+  }
+}

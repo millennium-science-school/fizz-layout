@@ -1,0 +1,68 @@
+{
+  "name": "@fizz/layout",
+  "type": "module",
+  "version": "0.1.5",
+  "description": "Fizz Layout - A flexible Vue 3 layout component library",
+  "author": "kanocence",
+  "license": "MIT",
+  "homepage": "",
+  "repository": "",
+  "bugs": "",
+  "keywords": [
+    "vue",
+    "vue3",
+    "layout",
+    "admin",
+    "element-plus",
+    "typescript",
+    "i18n"
+  ],
+  "publishConfig": {
+    "registry": "http://10.110.141.169:4873/"
+  },
+  "sideEffects": [
+    "*.css",
+    "*.scss"
+  ],
+  "exports": {
+    ".": {
+      "types": "./types/layout/src/index.d.ts",
+      "import": "./es/index.mjs"
+    },
+    "./locale": {
+      "types": "./types/locale/index.d.ts",
+      "import": "./locale/index.mjs"
+    },
+    "./index.css": "./es/index.css",
+    "./es/*": "./es/*",
+    "./types/*": "./types/*",
+    "./locale/*": "./locale/*",
+    "./theme-chalk/*": "./theme-chalk/*"
+  },
+  "main": "./es/index.mjs",
+  "module": "./es/index.mjs",
+  "types": "./types/layout/src/index.d.ts",
+  "style": "./es/index.css",
+  "files": [
+    "es",
+    "types",
+    "locale",
+    "theme-chalk"
+  ],
+  "dependencies": {
+    "@iconify/vue": "^4.0.0 || ^5.0.0",
+    "@vueuse/core": "^12.0.0 || ^13.0.0 || ^14.0.0",
+    "sortablejs": "^1.15.0"
+  },
+  "peerDependencies": {
+    "element-plus": "^2.4.0",
+    "vue": "^3.3.0",
+    "vue-i18n": "^9.0.0 || ^10.0.0 || ^11.0.0",
+    "vue-router": "^4.0.0 || ^5.0.0"
+  },
+  "peerDependenciesMeta": {
+    "vue-i18n": {
+      "optional": true
+    }
+  }
+}

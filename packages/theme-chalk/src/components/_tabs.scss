@@ -1,0 +1,143 @@
+// ========================================
+// Tabs 标签页组件样式
+// ========================================
+
+@use '../config/namespace' as *;
+@use '../config/vars' as *;
+@use '../mixins/layout' as *;
+
+// Tabs 容器
+.#{$fizz-ns}-layout-tabs {
+  @include flex-center-y;
+  background-color: var(--fizz-bg-color);
+  border-bottom: 1px solid var(--fizz-border-color-light);
+  box-sizing: border-box;
+}
+
+// Tabs 额外内容
+.#{$fizz-ns}-tabs__extra {
+  @include flex-center;
+  height: 100%;
+}
+
+// ========== TabsView 组件 ==========
+.#{$fizz-ns}-tabs-view {
+  display: flex;
+  flex: 1;
+  height: 100%;
+  overflow: hidden;
+
+  &__scroll-btn {
+    @include flex-center-y;
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+    cursor: pointer;
+    color: var(--fizz-text-color-secondary);
+
+    &:hover {
+      background-color: var(--#{$el-ns}-fill-color-light);
+      color: var(--fizz-text-color-primary);
+    }
+
+    &.is-disabled {
+      pointer-events: none;
+      opacity: 0.3;
+    }
+
+    &--left {
+      border-right: 1px solid var(--fizz-border-color);
+    }
+
+    &--right {
+      border-left: 1px solid var(--fizz-border-color);
+    }
+  }
+
+  &__icon {
+    @include square(1rem);
+  }
+
+  &__container {
+    flex: 1;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+
+    &--chrome {
+      padding-top: 3px;
+      box-sizing: border-box;
+    }
+  }
+
+  &__scroll-container {
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+  }
+}
+
+// ========== TabsMore 组件 ==========
+.#{$fizz-ns}-tabs-more {
+  height: 100%;
+
+  &__btn {
+    @include flex-center;
+    height: 100%;
+    cursor: pointer;
+    border-left: 1px solid var(--fizz-border-color);
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: var(--fizz-text-color-secondary);
+    box-sizing: border-box;
+
+    &:hover {
+      color: var(--fizz-text-color-primary);
+      background-color: var(--#{$el-ns}-fill-color-light);
+    }
+  }
+
+  &__icon {
+    @include square(1rem);
+  }
+
+  &__item-icon {
+    @include flex-center;
+    margin-right: 0.5rem;
+
+    &-svg {
+      @include square(1rem);
+    }
+  }
+}
+
+.#{$fizz-ns}-tabs-more__popper {
+  .#{$el-ns}-dropdown-menu__item {
+    @include flex-center-y;
+  }
+}
+
+// ========== TabsScreen 组件 ==========
+.#{$fizz-ns}-tabs-screen {
+  &__btn {
+    @include flex-center;
+    height: 100%;
+    cursor: pointer;
+    border-left: 1px solid var(--fizz-border-color);
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: var(--fizz-text-color-secondary);
+
+    &:hover {
+      color: var(--fizz-text-color-primary);
+      background-color: var(--#{$el-ns}-fill-color-light);
+    }
+  }
+
+  &__icon {
+    @include square(1rem);
+  }
+}

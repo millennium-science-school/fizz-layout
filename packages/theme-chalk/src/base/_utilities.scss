@@ -1,0 +1,89 @@
+// ========================================
+// 工具类样式
+// ========================================
+
+@use '../config/namespace' as *;
+@use '../config/vars' as *;
+@use '../mixins/layout' as *;
+@use '../mixins/components' as *;
+
+// ========== 滚动条样式 ==========
+.#{$fizz-ns}-scrollbar {
+  @include custom-scrollbar;
+}
+
+.#{$fizz-ns}-scrollbar-hidden {
+  @include hide-scrollbar;
+}
+
+// ========== Flex 工具类 ==========
+.#{$fizz-ns}-flex-center {
+  @include flex-center;
+}
+
+.#{$fizz-ns}-flex-center-y {
+  @include flex-center-y;
+}
+
+.#{$fizz-ns}-flex-center-x {
+  @include flex-center-x;
+}
+
+.#{$fizz-ns}-flex-column {
+  @include flex-column;
+}
+
+// ========== 文本工具类 ==========
+.#{$fizz-ns}-ellipsis {
+  @include text-ellipsis;
+}
+
+.#{$fizz-ns}-ellipsis-2 {
+  @include text-ellipsis-multiline(2);
+}
+
+.#{$fizz-ns}-ellipsis-3 {
+  @include text-ellipsis-multiline(3);
+}
+
+// ========== Widget 按钮 ==========
+.#{$fizz-ns}-widget-btn {
+  @include widget-button;
+}
+
+// ========== 布局主区域 ==========
+.#{$fizz-ns}-layout-main {
+  overflow: hidden;
+}
+
+// ========== 可见性工具类 ==========
+.#{$fizz-ns}-hidden {
+  display: none !important;
+}
+
+.#{$fizz-ns}-visible {
+  visibility: visible !important;
+}
+
+.#{$fizz-ns}-invisible {
+  visibility: hidden !important;
+}
+
+// ========== 响应式隐藏 ==========
+@media (max-width: 767px) {
+  .#{$fizz-ns}-hidden-mobile {
+    display: none !important;
+  }
+}
+
+@media (min-width: 768px) {
+  .#{$fizz-ns}-hidden-desktop {
+    display: none !important;
+  }
+}
+
+@media (min-width: 1024px) {
+  .#{$fizz-ns}-show-lg {
+    display: flex !important;
+  }
+}

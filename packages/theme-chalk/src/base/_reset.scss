@@ -1,0 +1,28 @@
+// ========================================
+// 基础重置样式
+// ========================================
+
+@use '../config/vars' as *;
+
+// ========== 根元素 ==========
+html,
+:host {
+  line-height: $line-height-base;
+  -webkit-text-size-adjust: 100%;
+  tab-size: 4;
+  font-family: #{$font-family-sans};
+  font-feature-settings: normal;
+  font-variation-settings: normal;
+  -webkit-tap-highlight-color: transparent;
+}
+
+// ========== 媒体元素 ==========
+img,
+video,
+canvas,
+audio,
+iframe,
+embed,
+object {
+  display: block;
+}

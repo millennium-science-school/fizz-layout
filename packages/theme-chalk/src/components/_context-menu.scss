@@ -1,0 +1,68 @@
+// ========================================
+// ContextMenu 右键菜单样式
+// ========================================
+
+@use '../config/namespace' as *;
+@use '../config/vars' as *;
+@use '../mixins/layout' as *;
+
+.#{$fizz-ns}-context-menu {
+  color: var(--fizz-text-color-primary);
+  padding: 0.25rem;
+  border: 1px solid var(--fizz-border-color);
+  border-radius: $radius-base;
+  background-color: var(--fizz-bg-color-overlay);
+  min-width: 160px;
+  box-shadow: $shadow-lg;
+  position: fixed;
+  z-index: $z-index-context-menu;
+
+  // 分隔线
+  &__separator {
+    margin: 0.25rem 0;
+    border-top: 1px solid var(--fizz-border-color);
+  }
+
+  // 菜单项
+  &__item {
+    font-size: $font-size-sm;
+    padding: 0.25rem 0.5rem;
+    border-radius: $radius-sm;
+    @include flex-center-y;
+    gap: 0.5rem;
+    width: 100%;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    color: inherit;
+    text-align: left;
+
+    &:hover:not(.is-disabled) {
+      background-color: var(--fizz-color-primary-light);
+    }
+
+    &.is-disabled {
+      cursor: not-allowed;
+      color: var(--fizz-text-color-placeholder);
+      opacity: 0.7;
+    }
+  }
+
+  // 图标
+  &__icon {
+    @include flex-center;
+    @include square(1rem);
+  }
+
+  // 文本
+  &__text {
+    text-align: left;
+    flex: 1;
+  }
+
+  // 快捷键
+  &__shortcut {
+    font-size: $font-size-xs;
+    color: var(--fizz-text-color-secondary);
+  }
+}

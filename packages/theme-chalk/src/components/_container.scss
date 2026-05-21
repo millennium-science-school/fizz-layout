@@ -1,0 +1,11 @@
+// ========================================
+// Container 容器组件样式
+// ========================================
+
+@use '../config/namespace' as *;
+
+.#{$fizz-ns}-container {
+  position: relative;
+  height: 100%;
+  overflow: hidden;
+}

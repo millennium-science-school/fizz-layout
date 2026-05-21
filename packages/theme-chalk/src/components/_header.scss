@@ -1,0 +1,127 @@
+// ========================================
+// Header 头部组件样式
+// ========================================
+
+@use '../config/namespace' as *;
+@use '../config/vars' as *;
+@use '../mixins/layout' as *;
+
+// Layout Header 容器
+.#{$fizz-ns}-layout-header {
+  @include flex-center-y;
+  flex-shrink: 0;
+  background-color: var(--fizz-bg-color);
+  border-bottom: 1px solid var(--fizz-border-color-light);
+  box-sizing: border-box;
+
+  // Logo 区域
+  &-logo {
+    display: flex;
+    flex-shrink: 0;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0 1rem;
+    box-sizing: border-box;
+    cursor: pointer;
+    transition: all $collapse-duration $collapse-transition;
+    border-color: var(--fizz-border-color-light);
+
+    &:hover {
+      opacity: 0.85;
+    }
+
+    &__img {
+      height: 2rem;
+      flex-shrink: 0;
+    }
+
+    &__title {
+      font-size: 1.125rem;
+      line-height: 1.75rem;
+      font-weight: 600;
+      white-space: nowrap;
+      color: var(--fizz-text-color-primary);
+    }
+  }
+
+  // 菜单区域
+  &-menu {
+    width: 100%;
+    min-width: 0;
+    max-width: 100%;
+    overflow: hidden;
+  }
+}
+
+// Header 组件内部
+.#{$fizz-ns}-header {
+  // 刷新按钮
+  &__refresh-btn {
+    margin: 0 0.25rem;
+    border-radius: $radius-base;
+  }
+
+  &__refresh-icon {
+    font-size: 1rem;
+    line-height: 1.5rem;
+  }
+
+  // 面包屑区域
+  &__breadcrumb {
+    display: none;
+    align-items: center;
+    justify-content: center;
+
+    @media (min-width: 1024px) {
+      display: flex;
+    }
+  }
+
+  // 菜单区域
+  &__menu {
+    @include flex-center-y;
+    flex: 1;
+    height: 100%;
+    min-width: 0;
+    overflow: hidden;
+
+    &[data-align='center'] {
+      justify-content: center;
+    }
+
+    &[data-align='end'] {
+      justify-content: flex-end;
+    }
+  }
+
+  // 右侧工具区
+  &__right {
+    @include flex-center-y;
+    padding: 0 4px;
+    flex-shrink: 0;
+    gap: 0.25rem;
+    height: 100%;
+    min-width: 0;
+  }
+}
+
+// Menu align CSS variables
+.#{$fizz-ns}-header__menu {
+  &[data-align='start'] {
+    --menu-align: start;
+  }
+
+  &[data-align='center'] {
+    --menu-align: center;
+  }
+
+  &[data-align='end'] {
+    --menu-align: end;
+  }
+}
+
+.#{$fizz-ns}-layout-header-menu {
+  min-width: 0;
+  max-width: 100%;
+  overflow: hidden;
+}

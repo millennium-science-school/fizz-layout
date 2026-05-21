@@ -1,0 +1,15 @@
+// ========================================
+// Icon 图标组件样式
+// ========================================
+
+@use '../config/namespace' as *;
+@use '../mixins/layout' as *;
+
+.#{$fizz-ns}-icon {
+  @include flex-center;
+
+  svg {
+    width: 1em;
+    height: 1em;
+  }
+}

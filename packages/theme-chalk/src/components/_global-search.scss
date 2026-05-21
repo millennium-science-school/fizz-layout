@@ -1,0 +1,80 @@
+// ========================================
+// GlobalSearch 全局搜索组件样式
+// ========================================
+
+@use '../config/namespace' as *;
+@use '../config/vars' as *;
+@use '../mixins/layout' as *;
+
+.#{$fizz-ns}-global-search {
+  @include flex-center-y;
+
+  .#{$fizz-ns}-search-trigger {
+    @include flex-center-y;
+    gap: 8px;
+    padding: 6px 12px;
+    cursor: pointer;
+    background-color: var(--#{$el-ns}-fill-color-light);
+    border: 1px solid var(--#{$el-ns}-border-color-lighter);
+    border-radius: 20px;
+    transition: all $transition-duration ease;
+
+    &:hover {
+      background-color: var(--#{$el-ns}-fill-color);
+      border-color: var(--#{$el-ns}-border-color);
+    }
+
+    &__icon {
+      font-size: $font-size-base;
+      color: var(--#{$el-ns}-text-color-placeholder);
+    }
+
+    &__text {
+      font-size: $font-size-sm;
+      color: var(--#{$el-ns}-text-color-secondary);
+    }
+
+    &__shortcut {
+      padding: 2px 6px;
+      font-family: inherit;
+      font-size: 11px;
+      color: var(--#{$el-ns}-text-color-placeholder);
+      background-color: var(--#{$el-ns}-fill-color-darker);
+      border: 1px solid var(--#{$el-ns}-border-color);
+      border-radius: $radius-sm;
+    }
+  }
+}
+
+.#{$fizz-ns}-global-search-dialog {
+  .#{$el-ns}-dialog__header {
+    display: none;
+  }
+
+  .#{$fizz-ns}-global-search-results {
+    margin-top: 1rem;
+  }
+
+  .#{$fizz-ns}-search-item {
+    @include flex-center-y;
+    justify-content: space-between;
+    padding: 12px 16px;
+    cursor: pointer;
+    border-radius: $radius-sm;
+    transition: background-color $transition-duration;
+
+    &:hover {
+      background-color: var(--#{$el-ns}-fill-color-light);
+    }
+
+    &__title {
+      font-size: $font-size-base;
+      color: var(--#{$el-ns}-text-color-primary);
+    }
+
+    &__path {
+      font-size: $font-size-xs;
+      color: var(--#{$el-ns}-text-color-placeholder);
+    }
+  }
+}
