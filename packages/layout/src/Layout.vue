@@ -133,10 +133,10 @@ function findRootMenuPath(path: string | undefined): string {
   const findParent = (menus: MenuItemType[]): string => {
     for (const item of menus) {
       if (item.children?.some(child => child.path === path)) {
-        return item.path
+        return item.path ?? ''
       }
     }
-    return menu.path
+    return menu.path ?? ''
   }
 
   return findParent(headerMenus.value)
@@ -144,7 +144,7 @@ function findRootMenuPath(path: string | undefined): string {
 
 /** 获取可用的一级菜单路径（作为回退） */
 function getFallbackRootPath(): string {
-  return headerMenus.value[0]?.path ?? ''
+  return headerMenus.value.find(item => item.path)?.path ?? ''
 }
 
 /** 根据路径解析 mixed-nav 的根菜单，失败则回退 */
@@ -265,6 +265,9 @@ async function handleHeaderMenuSelect(key: string, mode?: string) {
       if (sidebar.value.autoActivateChild && children[0]) {
         // 自动激活第一个子菜单
         const firstChild = children[0]
+        if (!firstChild.path)
+          return
+
         const prevented = await triggerMenuClick(firstChild.path, firstChild, mode)
         if (!prevented) {
           emit('headerMenuSelect', firstChild.path, firstChild, mode)

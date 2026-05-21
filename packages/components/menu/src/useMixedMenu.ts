@@ -135,11 +135,12 @@ function useMixedMenu(options: UseMixedMenuOptions = {}): UseMixedMenuReturn {
       navigation(key)
     }
     else if (rootMenu && sidebar.value.autoActivateChild) {
-      navigation(
-        defaultSubMap.has(rootMenu.path)
-          ? (defaultSubMap.get(rootMenu.path) as string)
-          : rootMenu.path,
-      )
+      const targetPath = rootMenu.path && defaultSubMap.has(rootMenu.path)
+        ? (defaultSubMap.get(rootMenu.path) as string)
+        : rootMenu.path
+
+      if (targetPath)
+        navigation(targetPath)
     }
   }
 

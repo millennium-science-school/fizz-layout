@@ -9,6 +9,7 @@ import DocSlotsTable from '../../components/DocSlotsTable.vue'
 import DocTip from '../../components/DocTip.vue'
 
 const { updatePreferences } = usePreferences()
+const vueSfcExt = '.vue'
 
 // ========== 交互 Demo ==========
 const layouts = ['sidebar-nav', 'header-nav', 'mixed-nav'] as const
@@ -116,7 +117,7 @@ const mixedMenuCode = `<!-- 为不同布局分别指定菜单数据 -->
 
 const customMenuCode = `<script setup lang="ts">
 import { FizzLayout } from '@fizz/layout'
-import MyCustomMenu from './MyCustomMenu.vue'
+import MyCustomMenu from './MyCustomMenu${vueSfcExt}'
 <\/script>
 
 <template>

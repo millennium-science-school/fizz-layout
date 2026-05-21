@@ -3,6 +3,8 @@ import DocCodeBlock from '../../components/DocCodeBlock.vue'
 import DocSection from '../../components/DocSection.vue'
 import DocTip from '../../components/DocTip.vue'
 
+const vueSfcExt = '.vue'
+
 const step1Code = `# 安装依赖
 pnpm add @fizz/layout element-plus`
 
@@ -10,7 +12,7 @@ const step2MainCode = `// main.ts — 最小入口
 import { setupFizzLocale } from '@fizz/layout/hooks'
 import ElementPlus from 'element-plus'
 import { createApp } from 'vue'
-import App from './App.vue'
+import App from './App${vueSfcExt}'
 import { router } from './router'
 
 import 'element-plus/dist/index.css'

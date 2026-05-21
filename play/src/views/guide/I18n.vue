@@ -6,6 +6,7 @@ import DocTip from '../../components/DocTip.vue'
 
 const { locale } = usePreferences()
 const { t } = useLocale()
+const vueSfcExt = '.vue'
 
 const setupCode = `// main.ts — 完整的国际化配置
 import { createLocaleAdapter } from '@fizz/layout'
@@ -13,7 +14,7 @@ import { zhCN, enUS } from '@fizz-layout/locale'
 import ElementPlus from 'element-plus'
 import { createApp } from 'vue'
 import { createI18n } from 'vue-i18n'
-import App from './App.vue'
+import App from './App${vueSfcExt}'
 
 const i18n = createI18n({
   legacy: false,

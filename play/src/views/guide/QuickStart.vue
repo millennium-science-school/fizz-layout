@@ -3,6 +3,8 @@ import DocCodeBlock from '../../components/DocCodeBlock.vue'
 import DocSection from '../../components/DocSection.vue'
 import DocTip from '../../components/DocTip.vue'
 
+const vueSfcExt = '.vue'
+
 // Demo 组件内联源码（Phase 2 验证用）
 const installCode = `# 使用 pnpm
 pnpm add fizz-layout
@@ -18,7 +20,7 @@ import { zhCN, enUS } from '@fizz/layout/locale'
 import ElementPlus from 'element-plus'
 import { createApp } from 'vue'
 import { createI18n } from 'vue-i18n'
-import App from './App.vue'
+import App from './App${vueSfcExt}'
 import { router } from './router'
 
 import 'element-plus/dist/index.css'

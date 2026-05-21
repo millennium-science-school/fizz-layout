@@ -10,6 +10,7 @@ const { preferences, isDark, sidebarCollapsed, updatePreferences, layout, toggle
 
 // 当前激活的代码 Tab
 const activeCodeTab = ref('app')
+const vueSfcExt = '.vue'
 
 function toggleHeader() {
   updatePreferences({ header: { enable: !preferences.value.header.enable } })
@@ -127,7 +128,7 @@ import { enUS, zhCN } from '@fizz/layout/locale'
 import ElementPlus from 'element-plus'
 import { createApp } from 'vue'
 import { createI18n } from 'vue-i18n'
-import App from './App.vue'
+import App from './App${vueSfcExt}'
 import { router } from './router'
 
 // 引入样式

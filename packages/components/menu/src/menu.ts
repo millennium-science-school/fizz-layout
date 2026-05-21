@@ -40,9 +40,9 @@ export interface MenuBadge {
  */
 export interface MenuItem extends MenuBadge {
   /**
-   * 菜单路径（唯一标识）
+   * 菜单路径（唯一标识）。仅作为分组容器的父级菜单可以不传。
    */
-  path: string
+  path?: string
   /**
    * 菜单名称
    */
@@ -180,5 +180,11 @@ export interface MenuContext {
   closeMenu: (path: string) => void
   handleSelect: (path: string) => void
 }
+
+function getMenuKey(item: MenuItem, fallback: string): string {
+  return item.path || `__fizz_menu_${fallback}`
+}
+
+export { getMenuKey }
 
 export type FlMenuProps = ExtractPropTypes<typeof flMenuProps>

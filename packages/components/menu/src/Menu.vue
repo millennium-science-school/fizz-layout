@@ -5,7 +5,7 @@ import { ElMenu } from 'element-plus'
 import { computed, nextTick, onMounted, provide, ref, useTemplateRef, watch } from 'vue'
 
 import { MENU_CONTEXT_KEY } from './constants'
-import { flMenuProps } from './menu'
+import { flMenuProps, getMenuKey } from './menu'
 import MenuItemComp from './MenuItem.vue'
 import SubMenu from './SubMenu.vue'
 
@@ -79,13 +79,14 @@ function expandActiveParents(path: string) {
 }
 
 /** 查找菜单项的所有父级路径 */
-function findParentPaths(menus: MenuItem[], targetPath: string, parents: string[] = []): string[] {
-  for (const menu of menus) {
+function findParentPaths(menus: MenuItem[], targetPath: string, parents: string[] = [], parentKey = ''): string[] {
+  for (const [index, menu] of menus.entries()) {
+    const menuKey = getMenuKey(menu, parentKey ? `${parentKey}_${index}` : `${index}`)
     if (menu.path === targetPath) {
       return parents
     }
     if (menu.children?.length) {
-      const found = findParentPaths(menu.children, targetPath, [...parents, menu.path])
+      const found = findParentPaths(menu.children, targetPath, [...parents, menuKey], menuKey)
       if (found.length > 0)
         return found
     }
@@ -168,10 +169,20 @@ provide<MenuContext>(MENU_CONTEXT_KEY, {
     @open="handleOpen"
     @close="handleClose"
   >
-    <template v-for="item in menus" :key="item.path">
+    <template v-for="(item, index) in menus" :key="getMenuKey(item, `${index}`)">
       <template v-if="item.show !== false">
-        <SubMenu v-if="item.children?.length" :key="`${item.path}_sub`" :item="item" />
-        <MenuItemComp v-else :key="item.path" :item="item" />
+        <SubMenu
+          v-if="item.children?.length"
+          :key="`${getMenuKey(item, `${index}`)}_sub`"
+          :item="item"
+          :item-key="getMenuKey(item, `${index}`)"
+        />
+        <MenuItemComp
+          v-else
+          :key="getMenuKey(item, `${index}`)"
+          :item="item"
+          :item-key="getMenuKey(item, `${index}`)"
+        />
       </template>
     </template>
   </ElMenu>

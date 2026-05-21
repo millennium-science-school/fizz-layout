@@ -5,19 +5,21 @@ import { FlIcon } from '@fizz-layout/components'
 import { ElSubMenu } from 'element-plus'
 import { computed, inject } from 'vue'
 import { MENU_CONTEXT_KEY } from './constants'
+import { getMenuKey } from './menu'
 import MenuItemComp from './MenuItem.vue'
 
 defineOptions({ name: 'FlSubMenu' })
 
 const props = defineProps<{
   item: MenuItem
+  itemKey: string
 }>()
 
 const menuContext = inject<MenuContext>(MENU_CONTEXT_KEY)
 
 /** 是否展开 */
 const isOpened = computed(() => {
-  return menuContext?.openedMenus.value.includes(props.item.path) ?? false
+  return menuContext?.openedMenus.value.includes(props.itemKey) ?? false
 })
 
 /** 是否有激活的子项 */
@@ -41,11 +43,15 @@ function isChildActive(children: MenuItem[], activePath: string): boolean {
 const visibleChildren = computed(() => {
   return (props.item.children || []).filter(child => child.show !== false)
 })
+
+function getChildKey(child: MenuItem, index: number): string {
+  return getMenuKey(child, `${props.itemKey}_${index}`)
+}
 </script>
 
 <template>
   <ElSubMenu
-    :index="item.path"
+    :index="itemKey"
     :class="{ 'is-opened': isOpened, 'has-active-child': hasActiveChild }"
     popper-class="fizz-menu-popper fizz-menu-popper--rounded"
   >
@@ -55,9 +61,18 @@ const visibleChildren = computed(() => {
       <span v-if="item.badge" class="fizz-menu-item__badge">{{ item.badge }}</span>
     </template>
 
-    <template v-for="child in visibleChildren" :key="child.path">
-      <FlSubMenu v-if="child.children?.length" :item="child" />
-      <MenuItemComp v-else :key="child.path" :item="child" />
+    <template v-for="(child, index) in visibleChildren" :key="getChildKey(child, index)">
+      <FlSubMenu
+        v-if="child.children?.length"
+        :item="child"
+        :item-key="getChildKey(child, index)"
+      />
+      <MenuItemComp
+        v-else
+        :key="getChildKey(child, index)"
+        :item="child"
+        :item-key="getChildKey(child, index)"
+      />
     </template>
   </ElSubMenu>
 </template>

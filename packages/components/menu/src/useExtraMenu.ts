@@ -68,24 +68,26 @@ function useExtraMenu(options: UseExtraMenuOptions = {}): UseExtraMenuReturn {
    * @param menu
    */
   const handleMixedMenuSelect = async (menu: MenuItem) => {
+    const menuPath = menu.path
     const _extraMenus = menu?.children ?? []
     const hasChildren = _extraMenus.length > 0
 
-    if (!willOpenedByWindow(menu.path)) {
+    if (!menuPath || !willOpenedByWindow(menuPath)) {
       extraMenus.value = _extraMenus ?? []
-      extraActiveMenu.value = menu.parents?.[parentLevel.value] ?? menu.path
+      extraActiveMenu.value = menu.parents?.[parentLevel.value] ?? menuPath ?? ''
       sidebarExtraVisible.value = hasChildren
     }
 
-    if (!hasChildren) {
-      await navigation(menu.path)
+    if (!hasChildren && menuPath) {
+      await navigation(menuPath)
     }
     else if (sidebar.value.autoActivateChild) {
-      await navigation(
-        defaultSubMap.has(menu.path)
-          ? defaultSubMap.get(menu.path)!
-          : (menu.children?.[0]?.path ?? menu.path),
-      )
+      const targetPath = menuPath && defaultSubMap.has(menuPath)
+        ? defaultSubMap.get(menuPath)!
+        : (menu.children?.find(child => child.path)?.path ?? menuPath)
+
+      if (targetPath)
+        await navigation(targetPath)
     }
   }
 
@@ -99,7 +101,7 @@ function useExtraMenu(options: UseExtraMenuOptions = {}): UseExtraMenuReturn {
     rootMenu?: MenuItem,
   ) => {
     extraMenus.value = rootMenu?.children ?? extraRootMenus.value ?? []
-    extraActiveMenu.value = menu.parents?.[parentLevel.value] ?? menu.path
+    extraActiveMenu.value = menu.parents?.[parentLevel.value] ?? menu.path ?? ''
 
     if (sidebar.value.expandOnHover) {
       sidebarExtraVisible.value = extraMenus.value.length > 0
@@ -126,6 +128,13 @@ function useExtraMenu(options: UseExtraMenuOptions = {}): UseExtraMenuReturn {
 
   const handleMenuMouseEnter = (menu: MenuItem) => {
     if (!sidebar.value.expandOnHover && findRootMenuByPath) {
+      if (!menu.path) {
+        extraMenus.value = menu.children ?? []
+        extraActiveMenu.value = menu.parents?.[parentLevel.value] ?? ''
+        sidebarExtraVisible.value = extraMenus.value.length > 0
+        return
+      }
+
       const { findMenu } = findRootMenuByPath(menus.value, menu.path)
       extraMenus.value = findMenu?.children ?? []
       extraActiveMenu.value = menu.parents?.[parentLevel.value] ?? menu.path

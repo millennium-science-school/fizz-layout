@@ -10,25 +10,29 @@ defineOptions({ name: 'FlMenuItem' })
 
 const props = defineProps<{
   item: MenuItem
+  itemKey: string
 }>()
 
 const menuContext = inject<MenuContext>(MENU_CONTEXT_KEY)
 
 /** 是否激活 */
 const isActive = computed(() => {
-  return menuContext?.activePath.value === props.item.path
+  return !!props.item.path && menuContext?.activePath.value === props.item.path
 })
 
 /** 处理点击 */
 function handleClick() {
-  menuContext?.handleSelect?.(props.item.path)
+  if (props.item.path) {
+    menuContext?.handleSelect?.(props.item.path)
+  }
 }
 </script>
 
 <template>
   <ElMenuItem
-    :index="item.path"
+    :index="itemKey"
     :class="{ 'is-active': isActive }"
+    :disabled="item.disabled || !item.path"
     class="sub-menu-item"
     @click="handleClick"
   >
