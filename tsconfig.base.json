@@ -1,0 +1,36 @@
+{
+  "extends": "@vue/tsconfig/tsconfig.dom.json",
+  "compilerOptions": {
+    "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.app.tsbuildinfo",
+
+    "target": "ES2023",
+    "baseUrl": ".",
+    "rootDir": ".",
+    "module": "ESNext",
+    "moduleResolution": "bundler",
+
+    "paths": {
+      "@fizz-layout/locale": ["packages/locale"],
+      "@fizz-layout/locale/*": ["packages/locale/*"],
+      "@fizz-layout/hooks": ["packages/hooks/src"],
+      "@fizz-layout/hooks/*": ["packages/hooks/src/*"],
+      "@fizz-layout/components": ["packages/components"],
+      "@fizz-layout/components/*": ["packages/components/*"],
+      "@fizz-layout/core": ["packages/layout/src"],
+      "@fizz-layout/core/*": ["packages/layout/src/*"]
+    },
+
+    "resolveJsonModule": true,
+    "types": ["vite/client", "unplugin-icons/types/vue"],
+    "allowJs": false,
+    "strict": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "outDir": "dist",
+    "removeComments": false,
+    "sourceMap": false,
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
+    "preserveSymlinks": true
+  }
+}

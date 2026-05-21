@@ -1,0 +1,108 @@
+// ========================================
+// CSS 变量定义（:root / [data-theme]）
+// ========================================
+
+@use 'vars' as *;
+
+// ========== 浅色主题变量（默认） ==========
+:root,
+:host {
+  // === 字体 ===
+  --fizz-font-sans: #{$font-family-sans};
+  --fizz-font-mono: #{$font-family-mono};
+
+  // === 颜色 — 主色调 ===
+  --fizz-color-primary: #{$color-primary};
+  --fizz-color-primary-light: #{$color-primary-light};
+  --fizz-color-primary-light-9: rgba(64, 158, 255, 0.15);
+  --fizz-color-success: #{$color-success};
+  --fizz-color-warning: #{$color-warning};
+  --fizz-color-danger: #{$color-danger};
+  --fizz-color-info: #{$color-info};
+
+  // === 颜色 — 文字 ===
+  --fizz-text-color-primary: #{$text-color-primary};
+  --fizz-text-color-regular: #{$text-color-regular};
+  --fizz-text-color-secondary: #{$text-color-secondary};
+  --fizz-text-color-placeholder: #{$text-color-placeholder};
+
+  // === 颜色 — 边框 ===
+  --fizz-border-color: #{$border-color};
+  --fizz-border-color-light: #{$border-color-light};
+  --fizz-border-color-lighter: #{$border-color-lighter};
+  --fizz-border-color-extra-light: #{$border-color-extra-light};
+
+  // === 颜色 — 背景 ===
+  --fizz-bg-color: #{$bg-color};
+  --fizz-bg-color-page: #{$bg-color-page};
+  --fizz-bg-color-overlay: #{$bg-color-overlay};
+
+  // === 菜单（Element Plus 覆盖） ===
+  --fizz-menu-font-size: #{$menu-font-size};
+  --fizz-menu-icon-size: #{$menu-icon-size};
+  --fizz-menu-item-height: #{$menu-item-height};
+  --fizz-menu-item-radius: 0;
+  --fizz-menu-indent: #{$menu-indent};
+  --fizz-menu-transition: #{$transition-duration} #{$transition-timing};
+  --fizz-menu-bg: transparent;
+  --fizz-menu-text-color: var(--fizz-text-color-primary);
+  --fizz-menu-text-color-secondary: var(--fizz-text-color-secondary);
+  --fizz-menu-hover-bg: var(--fizz-color-primary-light);
+  --fizz-menu-hover-color: var(--fizz-color-primary);
+  --fizz-menu-active-bg: rgba(64, 158, 255, 0.15);
+  --fizz-menu-active-color: var(--fizz-color-primary);
+  --fizz-menu-submenu-active-bg: rgba(64, 158, 255, 0.1);
+
+  // === 标签页 ===
+  --fizz-tabs-height: #{$tabs-height};
+  --fizz-tabs-bg-color: #{$bg-color-page};
+  --fizz-tabs-item-bg-color: #{$bg-color};
+  --fizz-tabs-item-active-bg-color: #{$bg-color};
+  --fizz-tabs-item-color: #{$text-color-regular};
+  --fizz-tabs-item-active-color: var(--fizz-color-primary);
+  --fizz-tabs-border-color: var(--fizz-border-color-light);
+}
+
+// ========== 暗色主题变量 ==========
+.dark,
+[data-theme='dark'] {
+  // === 颜色 — 主色调 ===
+  --fizz-color-primary: #{$dark-color-primary};
+  --fizz-color-primary-light: #{$dark-color-primary-light};
+  --fizz-color-primary-light-9: rgba(64, 158, 255, 0.15);
+
+  // === 颜色 — 文字 ===
+  --fizz-text-color-primary: #{$dark-text-color-primary};
+  --fizz-text-color-regular: #{$dark-text-color-regular};
+  --fizz-text-color-secondary: #{$dark-text-color-secondary};
+  --fizz-text-color-placeholder: #{$dark-text-color-placeholder};
+
+  // === 颜色 — 边框 ===
+  --fizz-border-color: #{$dark-border-color};
+  --fizz-border-color-light: #{$dark-border-color-light};
+  --fizz-border-color-lighter: #{$dark-border-color-lighter};
+  --fizz-border-color-extra-light: #{$dark-border-color-extra-light};
+
+  // === 颜色 — 背景 ===
+  --fizz-bg-color: #{$dark-bg-color};
+  --fizz-bg-color-page: #{$dark-bg-color-page};
+  --fizz-bg-color-overlay: #{$dark-bg-color-overlay};
+
+  // === 菜单（暗色覆盖） ===
+  --fizz-menu-bg: transparent;
+  --fizz-menu-text-color: rgba(255, 255, 255, 0.85);
+  --fizz-menu-text-color-secondary: rgba(255, 255, 255, 0.65);
+  --fizz-menu-hover-bg: rgba(255, 255, 255, 0.1);
+  --fizz-menu-hover-color: #fff;
+  --fizz-menu-active-bg: rgba(64, 158, 255, 0.25);
+  --fizz-menu-active-color: #fff;
+  --fizz-menu-submenu-active-bg: rgba(64, 158, 255, 0.2);
+
+  // === 标签页（暗色覆盖） ===
+  --fizz-tabs-bg-color: #{$dark-bg-color-overlay};
+  --fizz-tabs-item-bg-color: #262626;
+  --fizz-tabs-item-active-bg-color: #333333;
+  --fizz-tabs-item-color: #{$dark-text-color-regular};
+  --fizz-tabs-item-active-color: var(--fizz-color-primary);
+  --fizz-tabs-border-color: var(--fizz-border-color);
+}

@@ -1,0 +1,219 @@
+// ========================================
+// Tab Chrome 风格标签项样式
+// ========================================
+
+@use '../config/namespace' as *;
+@use '../config/vars' as *;
+@use '../mixins/layout' as *;
+
+.#{$fizz-ns}-tabs-chrome {
+  position: relative;
+  @include flex-center-y;
+  align-items: flex-end;
+  width: max-content;
+  height: 100%;
+  padding-right: 1.5rem;
+
+  // 标签项
+  &__item {
+    position: relative;
+    @include flex-center-y;
+    height: 100%;
+    margin-right: -12px;
+    cursor: pointer;
+    user-select: none;
+    transition: all $transition-duration ease;
+
+    &.dragging {
+      opacity: 0.6;
+      cursor: grabbing;
+    }
+
+    &.is-active {
+      z-index: 2;
+    }
+  }
+
+  &__item-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    padding: 0 0.25rem;
+  }
+
+  // 分隔线
+  &__divider {
+    position: absolute;
+    top: 50%;
+    left: calc(var(--gap, 8px) * 1.25);
+    z-index: 0;
+    width: 1px;
+    height: 1rem;
+    background-color: var(--fizz-border-color);
+    transform: translateY(-50%);
+    transition: all $transition-duration-fast;
+  }
+
+  // 背景
+  &__background {
+    position: absolute;
+    z-index: -1;
+    width: 100%;
+    height: 100%;
+    padding: 0 calc(var(--gap, 8px) - 1px);
+    box-sizing: border-box;
+    transition: opacity $transition-duration-fast;
+
+    &-content {
+      height: 100%;
+      background-color: transparent;
+      border-top-left-radius: var(--gap, 8px);
+      border-top-right-radius: var(--gap, 8px);
+      transition: background-color $transition-duration-fast;
+    }
+
+    &-before,
+    &-after {
+      position: absolute;
+      bottom: 0;
+      fill: transparent;
+      transition: fill $transition-duration-fast;
+    }
+
+    &-before {
+      left: -1px;
+    }
+
+    &-after {
+      right: -1px;
+    }
+  }
+
+  // 额外按钮区域
+  &__extra {
+    position: absolute;
+    top: 50%;
+    right: var(--gap, 8px);
+    z-index: 3;
+    @include square(16px);
+    transform: translateY(-50%);
+
+    svg {
+      display: block;
+    }
+  }
+
+  // 主内容区
+  &__item-main {
+    position: relative;
+    z-index: 2;
+    @include flex-center-y;
+    height: 100%;
+    padding-right: 0;
+    padding-left: 0.25rem;
+    margin: 0 calc(var(--gap, 8px) * 2);
+    overflow: hidden;
+    color: var(--fizz-text-color-regular);
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    transition: color $transition-duration-fast;
+
+    &.has-close {
+      padding-right: 0.75rem;
+    }
+  }
+
+  // 图标
+  &__item-icon {
+    @include flex-center;
+    @include square(1rem);
+    margin-right: 0.25rem;
+    overflow: hidden;
+  }
+
+  // 标题
+  &__item-title {
+    flex: 1;
+    overflow: hidden;
+    font-size: $font-size-sm;
+    line-height: 1.25rem;
+    white-space: nowrap;
+  }
+
+  // 关闭图标
+  &__close-icon {
+    @include square(0.75rem);
+    margin-top: 2px;
+    color: color-mix(in srgb, var(--fizz-text-color-primary, hsl(222.2 47.4% 11.2%)) 80%, transparent);
+    cursor: pointer;
+    border-radius: $radius-full;
+    transition: all $transition-duration-fast $collapse-transition;
+    stroke: color-mix(in srgb, var(--fizz-text-color-primary, hsl(222.2 47.4% 11.2%)) 80%, transparent);
+
+    &:hover {
+      color: var(--fizz-text-color-primary);
+      transform: scale(1.1);
+    }
+  }
+
+  // 固定图标
+  &__pin-icon {
+    @include square(0.875rem);
+    margin-top: 1px;
+    color: var(--fizz-text-color-secondary);
+    cursor: pointer;
+    border-radius: $radius-full;
+    transition: all $transition-duration;
+
+    &:hover {
+      color: var(--fizz-text-color-primary);
+      transform: scale(1.1);
+    }
+  }
+
+  // ========== 激活状态 ==========
+  &__item.is-active {
+    .#{$fizz-ns}-tabs-chrome__background-content {
+      background-color: var(--fizz-color-primary-light-9, rgba(64, 158, 255, 0.15));
+    }
+
+    .#{$fizz-ns}-tabs-chrome__background-before,
+    .#{$fizz-ns}-tabs-chrome__background-after {
+      fill: var(--fizz-color-primary-light-9, rgba(64, 158, 255, 0.15));
+    }
+
+    .#{$fizz-ns}-tabs-chrome__item-main {
+      color: var(--fizz-color-primary);
+    }
+
+    .#{$fizz-ns}-tabs-chrome__divider {
+      opacity: 0 !important;
+    }
+
+    + .#{$fizz-ns}-tabs-chrome__item .#{$fizz-ns}-tabs-chrome__divider {
+      opacity: 0 !important;
+    }
+  }
+
+  // ========== Hover 状态（非激活） ==========
+  &__item:not(.is-active):not(.dragging):hover {
+    .#{$fizz-ns}-tabs-chrome__divider {
+      opacity: 0;
+    }
+
+    + .#{$fizz-ns}-tabs-chrome__item .#{$fizz-ns}-tabs-chrome__divider {
+      opacity: 0;
+    }
+
+    .#{$fizz-ns}-tabs-chrome__background {
+      z-index: 1;
+      padding-bottom: 2px;
+
+      &-content {
+        margin: 0 2px;
+        background-color: var(--fizz-bg-color-page);
+        border-radius: $radius-base;
+      }
+    }
+  }
+}

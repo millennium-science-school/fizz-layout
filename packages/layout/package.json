@@ -1,0 +1,11 @@
+{
+  "name": "@fizz-layout/core",
+  "private": true,
+  "description": "Fizz Layout - A flexible Vue 3 layout component library",
+  "main": "src/index.ts",
+  "module": "src/index.ts",
+  "types": "src/index.ts",
+  "scripts": {
+    "build": "vue-tsc --noEmit && vite build"
+  }
+}

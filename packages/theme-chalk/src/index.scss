@@ -1,0 +1,31 @@
+// ========================================
+// Fizz Layout 样式入口
+// ========================================
+//
+// 目录结构：
+// ├── config/       配置层（变量、命名空间、CSS 变量）
+// ├── theme/        主题层（浅色/深色主题）
+// ├── mixins/       工具层（布局、响应式、组件 mixins）
+// ├── base/         基础样式（重置、过渡、工具类）
+// ├── components/   组件样式（所有组件）
+// └── vendors/      第三方覆盖（Element Plus 等）
+//
+// 使用方式：
+// @use '@fizz-layout/theme-chalk-next' as *;
+// 或
+// @import '@fizz-layout/theme-chalk-next';
+
+// 1. 配置层（CSS 变量定义）
+@use './config/index' as config;
+
+// 2. 主题层（组件主题样式）
+@use './theme/index' as theme;
+
+// 3. 基础样式（重置、过渡、工具类）
+@use './base/index' as base;
+
+// 4. 组件样式
+@use './components/index' as components;
+
+// 5. 第三方样式覆盖
+@use './vendors/index' as vendors;

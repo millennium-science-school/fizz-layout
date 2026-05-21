@@ -1,0 +1,32 @@
+// ========================================
+// Translation 多语言切换组件样式
+// ========================================
+
+@use '../config/namespace' as *;
+@use '../config/vars' as *;
+
+.#{$fizz-ns}-translation {
+  .#{$fizz-ns}-translation-trigger {
+    display: flex;
+    gap: 6px;
+    align-items: center;
+    padding: 6px 12px;
+    cursor: pointer;
+    border-radius: $radius-base;
+    transition: background-color $transition-duration;
+
+    &:hover {
+      background-color: var(--#{$el-ns}-fill-color-light);
+    }
+
+    &__icon {
+      font-size: 1rem;
+      color: var(--#{$el-ns}-text-color-secondary);
+    }
+
+    &__text {
+      font-size: $font-size-xs;
+      color: var(--#{$el-ns}-text-color-regular);
+    }
+  }
+}

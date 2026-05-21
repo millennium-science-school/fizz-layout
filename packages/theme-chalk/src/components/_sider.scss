@@ -1,0 +1,91 @@
+// ========================================
+// Sidebar 侧边栏组件样式
+// ========================================
+
+@use '../config/namespace' as *;
+@use '../config/vars' as *;
+@use '../mixins/layout' as *;
+
+.#{$fizz-ns}-layout-sidebar {
+  @include flex-column;
+  flex-shrink: 0;
+  height: 100%;
+  overflow: hidden;
+  background-color: var(--fizz-bg-color);
+  border-right: 1px solid var(--fizz-border-color-light);
+  transition: width $collapse-duration $collapse-transition;
+  will-change: width;
+  contain: layout style;
+
+  // Logo 区域
+  &-logo {
+    display: flex;
+    flex-shrink: 0;
+    align-items: center;
+    padding: 0 1em;
+    cursor: pointer;
+    transition: padding $collapse-duration $collapse-transition;
+
+    &:hover {
+      opacity: 0.85;
+    }
+
+    &__img {
+      height: 2rem;
+      flex-shrink: 0;
+    }
+
+    &__title {
+      font-size: 1.125rem;
+      line-height: 1.75rem;
+      font-weight: 600;
+      white-space: nowrap;
+      overflow: hidden;
+      opacity: 1;
+      transition:
+        width $collapse-duration $collapse-transition,
+        opacity $transition-duration-fast ease,
+        margin $collapse-duration $collapse-transition;
+      margin-left: 0.5rem;
+      color: var(--fizz-text-color-primary);
+    }
+
+    &--centered {
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    &--flex-center {
+      @include flex-center;
+    }
+  }
+
+  // 菜单区域
+  &-menu {
+    flex: 1;
+    min-height: 0;
+    padding: 8px 0;
+    overflow-x: hidden;
+    overflow-y: auto;
+  }
+
+  // 折叠按钮
+  &-collapse {
+    @include flex-center;
+    flex-shrink: 0;
+    height: 36px;
+    cursor: pointer;
+    border-top: 1px solid var(--fizz-border-color-light);
+    transition: background-color $transition-duration;
+
+    &:hover {
+      background-color: var(--fizz-color-primary-light);
+    }
+
+    &-icon {
+      color: var(--fizz-text-color-secondary);
+      font-size: 1rem;
+      line-height: 1.5rem;
+    }
+  }
+}

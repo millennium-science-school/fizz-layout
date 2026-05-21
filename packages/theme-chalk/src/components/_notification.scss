@@ -1,0 +1,54 @@
+// ========================================
+// Notification 通知组件样式
+// ========================================
+
+@use '../config/namespace' as *;
+@use '../config/vars' as *;
+@use '../mixins/layout' as *;
+
+.#{$fizz-ns}-notification-tabs {
+  .#{$el-ns}-tabs__header {
+    margin: 0;
+  }
+
+  .#{$fizz-ns}-notification-item {
+    padding: 12px;
+    cursor: pointer;
+    border-bottom: 1px solid var(--#{$el-ns}-border-color-lighter);
+    transition: background-color $transition-duration;
+
+    &:hover {
+      background-color: var(--#{$el-ns}-fill-color-light);
+    }
+
+    &.is-read {
+      opacity: 0.6;
+    }
+
+    &__title {
+      font-size: $font-size-base;
+      font-weight: 500;
+      color: var(--#{$el-ns}-text-color-primary);
+      margin-bottom: 4px;
+    }
+
+    &__message {
+      font-size: $font-size-xs;
+      color: var(--#{$el-ns}-text-color-regular);
+      margin-bottom: 4px;
+      @include text-ellipsis;
+    }
+
+    &__date {
+      font-size: $font-size-xs;
+      color: var(--#{$el-ns}-text-color-placeholder);
+    }
+  }
+
+  .#{$fizz-ns}-notification-footer {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px 12px;
+    border-top: 1px solid var(--#{$el-ns}-border-color-lighter);
+  }
+}

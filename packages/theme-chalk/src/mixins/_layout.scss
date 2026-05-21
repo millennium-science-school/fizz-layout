@@ -1,0 +1,120 @@
+// ========================================
+// 布局相关 Mixins
+// ========================================
+
+// Flex 居中
+@mixin flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+// Flex 垂直居中
+@mixin flex-center-y {
+  display: flex;
+  align-items: center;
+}
+
+// Flex 水平居中
+@mixin flex-center-x {
+  display: flex;
+  justify-content: center;
+}
+
+// Flex 列布局
+@mixin flex-column {
+  display: flex;
+  flex-direction: column;
+}
+
+// 文本溢出省略
+@mixin text-ellipsis {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+// 多行文本溢出省略
+@mixin text-ellipsis-multiline($lines: 2) {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: $lines;
+  overflow: hidden;
+}
+
+// 清除浮动
+@mixin clearfix {
+  &::after {
+    display: block;
+    clear: both;
+    content: '';
+  }
+}
+
+// 绝对定位填满父容器
+@mixin absolute-fill {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+
+// 固定定位填满视口
+@mixin fixed-fill {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+
+// 隐藏滚动条但保持可滚动
+@mixin hide-scrollbar {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+// 自定义滚动条
+@mixin custom-scrollbar($width: 6px, $thumb-color: rgba(144, 147, 153, 0.3)) {
+  &::-webkit-scrollbar {
+    width: $width;
+    height: $width;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: $thumb-color;
+    border-radius: calc($width / 2);
+
+    &:hover {
+      background-color: rgba(144, 147, 153, 0.5);
+    }
+  }
+}
+
+// 尺寸
+@mixin size($width, $height: $width) {
+  width: $width;
+  height: $height;
+}
+
+// 正方形
+@mixin square($size) {
+  width: $size;
+  height: $size;
+}
+
+// 圆形
+@mixin circle($size) {
+  width: $size;
+  height: $size;
+  border-radius: 50%;
+}

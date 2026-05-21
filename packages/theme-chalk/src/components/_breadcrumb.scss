@@ -1,0 +1,39 @@
+// ========================================
+// Breadcrumb 面包屑组件样式
+// ========================================
+
+@use '../config/namespace' as *;
+@use '../config/vars' as *;
+@use '../mixins/layout' as *;
+
+.#{$fizz-ns}-breadcrumb {
+  margin-left: 0.5rem;
+
+  &__item-content {
+    @include flex-center-y;
+    display: inline-flex;
+
+    &.is-link {
+      cursor: pointer;
+
+      &:hover {
+        color: var(--#{$el-ns}-color-primary);
+      }
+    }
+  }
+
+  &__icon {
+    margin-right: 0.25rem;
+    vertical-align: middle;
+  }
+
+  &--background {
+    .#{$el-ns}-breadcrumb__item {
+      .#{$el-ns}-breadcrumb__inner {
+        padding: 4px 8px;
+        background-color: var(--#{$el-ns}-fill-color-light);
+        border-radius: $radius-sm;
+      }
+    }
+  }
+}

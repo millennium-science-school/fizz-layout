@@ -1,0 +1,43 @@
+// ========================================
+// UserDropdown 用户下拉菜单组件样式
+// ========================================
+
+@use '../config/namespace' as *;
+@use '../config/vars' as *;
+@use '../mixins/layout' as *;
+
+.#{$fizz-ns}-user-dropdown {
+  .#{$fizz-ns}-user-dropdown-trigger {
+    @include flex-center-y;
+    gap: 8px;
+    padding: 4px 12px;
+    cursor: pointer;
+    border-radius: $radius-sm;
+    transition: background-color $transition-duration;
+
+    &:hover {
+      background-color: var(--#{$el-ns}-fill-color-light);
+    }
+
+    .#{$fizz-ns}-user-dropdown-avatar {
+      background-color: transparent;
+
+      &.default-avatar {
+        background-color: var(--#{$el-ns}-color-primary-light-7);
+        color: var(--#{$el-ns}-color-primary);
+      }
+    }
+
+    .#{$fizz-ns}-user-dropdown-name {
+      font-size: $font-size-base;
+      color: var(--#{$el-ns}-text-color-primary);
+      white-space: nowrap;
+    }
+  }
+}
+
+.#{$fizz-ns}-user-dropdown-menu {
+  .#{$fizz-ns}-user-dropdown-menu-icon {
+    margin-right: 0.5rem;
+  }
+}

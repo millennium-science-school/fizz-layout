@@ -1,0 +1,8 @@
+{
+  "name": "@fizz-layout/components",
+  "private": true,
+  "description": "Fizz Layout UI components",
+  "main": "index.ts",
+  "module": "index.ts",
+  "types": "index.ts"
+}

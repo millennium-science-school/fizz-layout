@@ -1,0 +1,45 @@
+publicHoistPattern:
+  - vue
+  - '@vue/*'
+  - '@vueuse/*'
+
+shellEmulator: true
+
+trustPolicy: off
+packages:
+  - packages/**
+  - play
+catalog:
+  '@antfu/eslint-config': ^7.7.3
+  '@iconify-json/carbon': ^1.2.20
+  '@iconify/vue': ^5.0.0
+  '@types/node': ^24.12.2
+  '@types/sortablejs': ^1.15.9
+  '@vitejs/plugin-vue': ^6.0.6
+  '@vue/tsconfig': 0.9.0
+  '@vueuse/core': ^14.2.1
+  '@vueuse/integrations': ^14.2.1
+  element-plus: ^2.13.7
+  eslint: ^9.39.4
+  eslint-plugin-format: ^1.5.0
+  happy-dom: ^20.9.0
+  publint: ^0.3.18
+  rimraf: ^6.1.3
+  sass-embedded: ^1.99.0
+  shiki: ^4.0.2
+  sortablejs: ^1.15.7
+  turbo: ^2.9.6
+  typescript: ~5.9.3
+  unplugin-icons: ^23.0.1
+  vite: ^8.0.8
+  vite-plugin-dts: ^4.5.4
+  vite-plugin-vue-devtools: ^8.1.1
+  vitest: ^4.1.4
+  vue: ^3.5.32
+  vue-i18n: ^11.3.2
+  vue-router: ^5.0.4
+  vue-tsc: ^3.2.6
+onlyBuiltDependencies:
+  - '@parcel/watcher'
+  - esbuild
+  - vue-demi

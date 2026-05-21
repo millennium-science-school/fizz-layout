@@ -1,0 +1,136 @@
+// ========================================
+// SCSS 变量（仅编译时使用，不产出 CSS）
+// ========================================
+//
+// 命名约定：
+//   $category-property[-variant]
+//   例：$color-primary, $text-color-regular, $border-color-light
+//
+// 使用规则：
+//   - 组件样式中优先使用 CSS 变量（var(--fizz-*)）
+//   - SCSS 变量仅用于：
+//     1. 定义 CSS 变量的初始值（_css-vars.scss）
+//     2. mixin/function 中需要编译时求值的场景
+//     3. 不需要运行时切换的静态值（圆角、阴影、字号等）
+//   - 未被引用的变量会被定期清理
+
+@use 'sass:map';
+
+// ========== 颜色 — 主色调 ==========
+
+$color-primary: #409eff !default;
+$color-primary-light: #ecf5ff !default;
+
+$color-success: #67c23a !default;
+$color-warning: #e6a23c !default;
+$color-danger: #f56c6c !default;
+$color-info: #909399 !default;
+
+// ========== 颜色 — 文字 ==========
+
+$text-color-primary: #303133 !default;
+$text-color-regular: #606266 !default;
+$text-color-secondary: #909399 !default;
+$text-color-placeholder: #c0c4cc !default;
+
+// ========== 颜色 — 边框 ==========
+
+$border-color: #dcdfe6 !default;
+$border-color-light: #e4e7ed !default;
+$border-color-lighter: #ebeef5 !default;
+$border-color-extra-light: #f2f6fc !default;
+
+// ========== 颜色 — 背景 ==========
+
+$bg-color: #ffffff !default;
+$bg-color-page: #ffffff !default;
+$bg-color-overlay: #ffffff !default;
+
+// ========== 暗色主题颜色 ==========
+
+$dark-color-primary: #409eff !default;
+$dark-color-primary-light: rgba(64, 158, 255, 0.15) !default;
+
+$dark-text-color-primary: #e5eaf3 !default;
+$dark-text-color-regular: #cfd3dc !default;
+$dark-text-color-secondary: #a3a6ad !default;
+$dark-text-color-placeholder: #8d9095 !default;
+
+$dark-border-color: #4c4d4f !default;
+$dark-border-color-light: #414243 !default;
+$dark-border-color-lighter: #363637 !default;
+$dark-border-color-extra-light: #2b2b2c !default;
+
+$dark-bg-color: #141414 !default;
+$dark-bg-color-page: #0a0a0a !default;
+$dark-bg-color-overlay: #1d1d1d !default;
+
+// ========== 菜单 ==========
+
+$menu-font-size: 14px !default;
+$menu-icon-size: 16px !default;
+$menu-item-height: 44px !default;
+$menu-indent: 20px !default;
+
+// ========== 标签页 ==========
+
+$tabs-height: 40px !default;
+
+// ========== 动画 ==========
+
+$transition-duration: 0.2s !default;
+$transition-timing: ease !default;
+$transition-duration-fast: 0.15s !default;
+$transition-duration-slow: 0.3s !default;
+
+$collapse-transition: cubic-bezier(0.4, 0, 0.2, 1) !default;
+$collapse-duration: 0.25s !default;
+
+// ========== 圆角 ==========
+
+$radius-sm: 4px !default;
+$radius-base: 6px !default;
+$radius-md: 8px !default;
+$radius-lg: 12px !default;
+$radius-full: 9999px !default;
+
+// ========== 阴影 ==========
+
+$shadow-base: 0 2px 8px rgba(0, 0, 0, 0.1) !default;
+$shadow-md: 0 4px 12px rgba(0, 0, 0, 0.12) !default;
+$shadow-lg:
+  0 10px 15px -3px rgba(0, 0, 0, 0.1),
+  0 4px 6px -4px rgba(0, 0, 0, 0.1) !default;
+
+// ========== 字体 ==========
+
+$font-family-sans:
+  ui-sans-serif,
+  system-ui,
+  -apple-system,
+  BlinkMacSystemFont,
+  'Segoe UI',
+  Roboto,
+  'Helvetica Neue',
+  Arial,
+  'Noto Sans',
+  sans-serif,
+  'Apple Color Emoji',
+  'Segoe UI Emoji',
+  'Segoe UI Symbol',
+  'Noto Color Emoji' !default;
+
+$font-family-mono:
+  ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace !default;
+
+// 字号（仅保留组件中实际使用的）
+$font-size-xs: 12px !default;
+$font-size-sm: 13px !default;
+$font-size-base: 14px !default;
+
+// 行高
+$line-height-base: 1.5 !default;
+
+// ========== Z-Index 层级 ==========
+
+$z-index-context-menu: 9999 !default;

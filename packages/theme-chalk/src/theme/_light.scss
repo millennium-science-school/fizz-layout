@@ -1,0 +1,35 @@
+// ========================================
+// 浅色主题样式
+// ========================================
+
+@use '../config/namespace' as *;
+
+// 浅色菜单公共变量
+@mixin light-menu-vars {
+  --menu-item-color: hsl(222.2 84% 4.9%);
+  --menu-item-hover-color: hsl(222.2 47.4% 51.2%);
+  --menu-item-hover-background-color: hsl(210 40% 96.1%);
+  --menu-item-active-color: hsl(222.2 47.4% 51.2%);
+  --menu-item-active-background-color: hsl(222.2 47.4% 51.2% / 15%);
+  --menu-submenu-hover-color: hsl(222.2 47.4% 51.2%);
+  --menu-submenu-hover-background-color: hsl(210 40% 96.1%);
+  --menu-submenu-active-color: hsl(222.2 47.4% 51.2%);
+}
+
+// 浅色菜单主题
+.#{$fizz-ns}-menu {
+  &.is-light {
+    @include light-menu-vars;
+
+    --menu-submenu-active-background-color: transparent;
+  }
+}
+
+// 浅色菜单弹出容器
+.#{$fizz-ns}-menu__popup-container.is-light {
+  @include light-menu-vars;
+
+  --menu-submenu-active-background-color: hsl(222.2 47.4% 51.2% / 15%);
+  --fizz-bg-color-overlay: #fff;
+  --fizz-border-color: hsl(214.3 31.8% 91.4%);
+}

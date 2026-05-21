@@ -1,0 +1,11 @@
+{
+  "name": "@fizz-layout/locale",
+  "private": true,
+  "description": "Fizz Layout locale",
+  "main": "index.ts",
+  "module": "index.ts",
+  "types": "index.d.ts",
+  "scripts": {
+    "build": "vue-tsc --noEmit && vite build"
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "name": "@fizz-layout/hooks",
+  "private": true,
+  "description": "Fizz Layout hooks and composables",
+  "main": "src/index.ts",
+  "module": "src/index.ts",
+  "types": "src/index.ts"
+}

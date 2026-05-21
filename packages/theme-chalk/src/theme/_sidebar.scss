@@ -1,0 +1,15 @@
+// ========================================
+// Sidebar 半深色主题
+// ========================================
+// 仅在浅色模式下使用 .sidebar-semi-dark 类
+// 默认(light/dark)跟随全局 --fizz-* 变量，无需额外类名
+
+@use '../config/namespace' as *;
+@use 'semi-dark' as *;
+
+// ========== 半深色主题（浅色模式下的深色 Sidebar）==========
+.#{$fizz-ns}-layout-sidebar.sidebar-semi-dark {
+  @include semi-dark-theme;
+
+  --#{$el-ns}-menu-bg-color: #001529;
+}

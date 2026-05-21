@@ -1,0 +1,115 @@
+// ========================================
+// 响应式相关 Mixins
+// ========================================
+
+// 断点变量
+$breakpoints: (
+  'xs': 480px,
+  'sm': 640px,
+  'md': 768px,
+  'lg': 1024px,
+  'xl': 1280px,
+  '2xl': 1536px,
+) !default;
+
+// 最小宽度媒体查询
+@mixin screen-up($breakpoint) {
+  @if map-has-key($breakpoints, $breakpoint) {
+    @media (min-width: map-get($breakpoints, $breakpoint)) {
+      @content;
+    }
+  } @else {
+    @media (min-width: $breakpoint) {
+      @content;
+    }
+  }
+}
+
+// 最大宽度媒体查询
+@mixin screen-down($breakpoint) {
+  @if map-has-key($breakpoints, $breakpoint) {
+    @media (max-width: #{map-get($breakpoints, $breakpoint) - 1px}) {
+      @content;
+    }
+  } @else {
+    @media (max-width: #{$breakpoint - 1px}) {
+      @content;
+    }
+  }
+}
+
+// 区间媒体查询
+@mixin screen-between($min, $max) {
+  $min-width: if(map-has-key($breakpoints, $min), map-get($breakpoints, $min), $min);
+  $max-width: if(map-has-key($breakpoints, $max), map-get($breakpoints, $max) - 1px, $max - 1px);
+
+  @media (min-width: $min-width) and (max-width: $max-width) {
+    @content;
+  }
+}
+
+// 快捷方法
+@mixin xs {
+  @include screen-down('sm') {
+    @content;
+  }
+}
+
+@mixin sm {
+  @include screen-up('sm') {
+    @content;
+  }
+}
+
+@mixin md {
+  @include screen-up('md') {
+    @content;
+  }
+}
+
+@mixin lg {
+  @include screen-up('lg') {
+    @content;
+  }
+}
+
+@mixin xl {
+  @include screen-up('xl') {
+    @content;
+  }
+}
+
+// 移动端
+@mixin mobile {
+  @include screen-down('md') {
+    @content;
+  }
+}
+
+// 桌面端
+@mixin desktop {
+  @include screen-up('lg') {
+    @content;
+  }
+}
+
+// 偏好减少动画
+@mixin reduce-motion {
+  @media (prefers-reduced-motion: reduce) {
+    @content;
+  }
+}
+
+// 暗色模式偏好
+@mixin prefers-dark {
+  @media (prefers-color-scheme: dark) {
+    @content;
+  }
+}
+
+// 浅色模式偏好
+@mixin prefers-light {
+  @media (prefers-color-scheme: light) {
+    @content;
+  }
+}
