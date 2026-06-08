@@ -16,6 +16,7 @@
     "play:preview": "pnpm -C play run preview",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
+    "docs:check": "node scripts/check-docs.mjs",
     "lint:package": "publint ./dist",
     "test": "vitest",
     "inspector": "pnpx node-modules-inspector"
