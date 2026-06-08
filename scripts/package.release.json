@@ -1,7 +1,7 @@
 {
   "name": "@fizz/layout",
   "type": "module",
-  "version": "0.1.6",
+  "version": "0.1.7",
   "description": "Fizz Layout - A flexible Vue 3 layout component library",
   "author": "kanocence",
   "license": "MIT",
