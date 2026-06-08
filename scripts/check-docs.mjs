@@ -1,8 +1,10 @@
-import { readFileSync, readdirSync, statSync } from 'node:fs'
+import { readdirSync, readFileSync, statSync } from 'node:fs'
 import { dirname, resolve } from 'node:path'
+import process from 'node:process'
 import { fileURLToPath } from 'node:url'
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '..')
+const templateStringStartRE = /const\s+\w+\s*=\s*`/g
 
 function collectVueFiles(directory) {
   const absoluteDirectory = resolve(root, directory)
@@ -55,11 +57,11 @@ function lineOf(source, index) {
 
 function findTemplateStringRanges(source) {
   const ranges = []
-  const regex = /const\s+\w+\s*=\s*`/g
-  let match
+  templateStringStartRE.lastIndex = 0
+  let match = templateStringStartRE.exec(source)
 
-  while ((match = regex.exec(source))) {
-    const start = regex.lastIndex
+  while (match) {
+    const start = templateStringStartRE.lastIndex
     let cursor = start
     let escaped = false
 
@@ -73,11 +75,13 @@ function findTemplateStringRanges(source) {
       }
       else if (char === '`') {
         ranges.push([start, cursor])
-        regex.lastIndex = cursor + 1
+        templateStringStartRE.lastIndex = cursor + 1
         break
       }
       cursor += 1
     }
+
+    match = templateStringStartRE.exec(source)
   }
 
   return ranges

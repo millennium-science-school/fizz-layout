@@ -33,10 +33,10 @@ import '@fizz/layout/index.css'
 ## Public Imports
 
 ```ts
-import { FizzLayout, usePreferences } from '@fizz/layout'
-import { zhCN, enUS } from '@fizz/layout/locale'
-import { useLocale } from '@fizz/layout/hooks'
 import type { MenuItemType } from '@fizz/layout/components'
+import { FizzLayout, usePreferences } from '@fizz/layout'
+import { useLocale } from '@fizz/layout/hooks'
+import { enUS, zhCN } from '@fizz/layout/locale'
 ```
 
 ## License
