@@ -5,7 +5,7 @@ import DocTip from '../../components/DocTip.vue'
 
 // ========== 类型别名 ==========
 const typeAliasesCode = `// 布局类型
-type LayoutType = 'full-content' | 'header-nav' | 'mixed-nav' | 'side-nav'
+type LayoutType = 'header-nav' | 'sidebar-nav' | 'mixed-nav'
 
 // 主题模式
 type ThemeModeType = 'auto' | 'dark' | 'light'
@@ -48,7 +48,7 @@ const appPrefsCode = `interface AppPreferences {
   /** 内容紧凑模式 */
   contentCompact: ContentCompactType  // 'wide'
   /** 布局模式 */
-  layout: LayoutType                  // 'side-nav'
+  layout: LayoutType                  // 'header-nav'
   /** 应用名称 */
   name: string                        // 'Fizz Layout'
 }`

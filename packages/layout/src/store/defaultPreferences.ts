@@ -21,7 +21,6 @@ export const DEFAULT_PREFERENCES: LayoutPreferences = {
     contentPaddingLeft: 0,
     contentPaddingRight: 0,
     contentPaddingTop: 0,
-    isMobile: false,
     layout: 'header-nav',
     name: 'Fizz Layout',
     zIndex: 200,

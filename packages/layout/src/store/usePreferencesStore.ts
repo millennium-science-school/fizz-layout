@@ -167,7 +167,6 @@ const usePreferencesStore = createGlobalState(() => {
       isHeaderNav: current === 'header-nav',
       isMixedNav: current === 'mixed-nav',
       isSideNav: current === 'sidebar-nav',
-      isFullContent: current === 'full-content',
     }
   })
 

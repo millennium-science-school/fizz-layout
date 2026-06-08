@@ -7,8 +7,7 @@ import type { BreadcrumbStyleType, ThemeModeType } from '@fizz-layout/components
 
 /** 布局类型 */
 type LayoutType
-  = | 'full-content'
-    | 'header-nav'
+  = | 'header-nav'
     | 'sidebar-nav'
     | 'mixed-nav'
 
@@ -59,8 +58,6 @@ interface AppPreferences {
   contentPaddingRight: number
   /** 内容顶部内边距 */
   contentPaddingTop: number
-  /** 是否移动端 */
-  isMobile: boolean
   /** 布局方式 */
   layout: LayoutType
   /** 应用名 */
