@@ -21,7 +21,6 @@ src/
 │
 ├── mixins/                 # 工具层
 │   ├── _layout.scss        # 布局相关 mixins
-│   ├── _responsive.scss    # 响应式相关 mixins
 │   ├── _components.scss    # 组件相关 mixins
 │   └── _index.scss         # 工具层入口
 │
@@ -83,7 +82,6 @@ src/
 ### 4. Mixins 复用
 
 - 布局相关: flex-center, text-ellipsis 等
-- 响应式: screen-up, screen-down, mobile, desktop 等
 - 组件相关: button-base, widget-button, popup 等
 
 ## 使用方式
