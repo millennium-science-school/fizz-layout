@@ -1,6 +1,6 @@
 import { renderToString } from '@vue/server-renderer'
 import { describe, expect, it, vi } from 'vitest'
-import { createSSRApp, defineComponent, h } from 'vue'
+import { createApp, createSSRApp, defineComponent, h, nextTick } from 'vue'
 import Menu from './Menu.vue'
 
 vi.mock('@fizz-layout/components', () => ({
@@ -40,5 +40,32 @@ describe('menu', () => {
 
     warn.mockRestore()
     error.mockRestore()
+  })
+
+  it('emits select once when clicking a menu item', async () => {
+    const onSelect = vi.fn()
+    const root = document.createElement('div')
+    document.body.appendChild(root)
+
+    const app = createApp({
+      render: () => h(Menu, {
+        menus: [
+          { name: 'Dashboard', path: '/dashboard' },
+        ],
+        onSelect,
+      }),
+    })
+
+    app.mount(root)
+    await nextTick()
+
+    root.querySelector<HTMLElement>('.el-menu-item')?.click()
+    await nextTick()
+
+    expect(onSelect).toHaveBeenCalledTimes(1)
+    expect(onSelect).toHaveBeenCalledWith('/dashboard', 'vertical')
+
+    app.unmount()
+    document.body.removeChild(root)
   })
 })

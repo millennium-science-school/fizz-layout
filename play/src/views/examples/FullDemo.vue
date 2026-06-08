@@ -11,6 +11,7 @@ const { preferences, isDark, sidebarCollapsed, updatePreferences, layout, toggle
 // 当前激活的代码 Tab
 const activeCodeTab = ref('app')
 const vueSfcExt = '.vue'
+const fizzPackageName = '@fizz/layout'
 
 function toggleHeader() {
   updatePreferences({ header: { enable: !preferences.value.header.enable } })
@@ -38,8 +39,8 @@ import {
   FlTranslation,
   FlUserDropdown,
   usePreferences,
-} from '@fizz/layout'
-import { useMenuAdapter, useMenuClick } from '@fizz/layout/hooks'
+} from '${fizzPackageName}'
+import { useMenuAdapter, useMenuClick } from '${fizzPackageName}/hooks'
 import { computed } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 
@@ -123,8 +124,8 @@ const currentPath = computed(() => route.path)
   </FizzLayout>
 </template>`
 
-const mainTsCode = `import { createLocaleAdapter } from '@fizz/layout'
-import { enUS, zhCN } from '@fizz/layout/locale'
+const mainTsCode = `import { createLocaleAdapter } from '${fizzPackageName}'
+import { enUS, zhCN } from '${fizzPackageName}/locale'
 import ElementPlus from 'element-plus'
 import { createApp } from 'vue'
 import { createI18n } from 'vue-i18n'
@@ -134,7 +135,7 @@ import { router } from './router'
 // 引入样式
 import 'element-plus/dist/index.css'
 import 'element-plus/theme-chalk/dark/css-vars.css'
-import '@fizz/layout/theme-chalk/src/index.scss'
+import '${fizzPackageName}/theme-chalk/src/index.scss'
 
 // 国际化
 const i18n = createI18n({
@@ -224,7 +225,7 @@ const router = createRouter({
 export { router }`
 
 const menuBackendCode = `// 后端返回菜单结构 + createMenus 合并
-import { createMenus } from '@fizz/layout'
+import { createMenus } from '${fizzPackageName}'
 
 // 假设后端返回以下数据
 const backendMenus = [

@@ -19,13 +19,6 @@ const menuContext = inject<MenuContext>(MENU_CONTEXT_KEY)
 const isActive = computed(() => {
   return !!props.item.path && menuContext?.activePath.value === props.item.path
 })
-
-/** 处理点击 */
-function handleClick() {
-  if (props.item.path) {
-    menuContext?.handleSelect?.(props.item.path)
-  }
-}
 </script>
 
 <template>
@@ -34,7 +27,6 @@ function handleClick() {
     :class="{ 'is-active': isActive }"
     :disabled="item.disabled || !item.path"
     class="sub-menu-item"
-    @click="handleClick"
   >
     <FlIcon v-if="item.icon" :icon="item.icon" class="fizz-menu-item__icon" />
     <template #title>

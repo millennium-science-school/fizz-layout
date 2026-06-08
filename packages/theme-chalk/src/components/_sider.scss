@@ -67,6 +67,7 @@
     padding: 8px 0;
     overflow-x: hidden;
     overflow-y: auto;
+    @include custom-scrollbar;
   }
 
   // 折叠按钮
