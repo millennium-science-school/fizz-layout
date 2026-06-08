@@ -7,7 +7,7 @@ import DocPropsTable from '../../components/DocPropsTable.vue'
 import DocSection from '../../components/DocSection.vue'
 import DocTip from '../../components/DocTip.vue'
 
-const { updatePreferences, preferences } = usePreferences()
+const { preferences } = usePreferences()
 
 // 实时主题色选择
 const presetColors = [
@@ -21,22 +21,26 @@ const presetColors = [
   { name: '金盏花', value: '#faad14' },
 ]
 
-const customColor = ref(preferences.value.theme.colorPrimary || '#409eff')
+const customColor = ref('#409eff')
+const selectedRadius = ref('0.5rem')
 
 function applyColor(color: string) {
   customColor.value = color
-  updatePreferences({ theme: { colorPrimary: color } })
 }
 
 watch(customColor, (val) => {
-  updatePreferences({ theme: { colorPrimary: val } })
-})
+  document.documentElement.style.setProperty('--fizz-color-primary', val)
+  document.documentElement.style.setProperty('--fizz-menu-active-color', val)
+  document.documentElement.style.setProperty('--fizz-tabs-item-active-color', val)
+  document.documentElement.style.setProperty('--el-color-primary', val)
+}, { immediate: true })
 
 // 圆角选择
 const radiusOptions = ['0', '0.25rem', '0.375rem', '0.5rem', '0.75rem', '1rem']
 
 function applyRadius(radius: string) {
-  updatePreferences({ theme: { radius } })
+  selectedRadius.value = radius
+  document.documentElement.style.setProperty('--fizz-menu-item-radius', radius)
 }
 
 // ========== 代码示例 ==========
@@ -111,21 +115,21 @@ $radius-md: 8px;
 //   }
 // }`
 
-const jsThemeCode = `// 方式三：通过 usePreferences 动态修改（运行时）
-import { usePreferences } from '@fizz/layout'
-
-const { updatePreferences } = usePreferences()
+const jsThemeCode = `// 方式三：通过 CSS 变量动态修改（运行时）
+const root = document.documentElement
 
 // 切换主色调
-updatePreferences({
-  theme: {
-    colorPrimary: '#722ed1',
-    mode: 'light',           // 'auto' | 'light' | 'dark'
-    radius: '0.5rem',
-  },
-})
+root.style.setProperty('--fizz-color-primary', '#722ed1')
+root.style.setProperty('--fizz-menu-active-color', '#722ed1')
+root.style.setProperty('--fizz-tabs-item-active-color', '#722ed1')
+root.style.setProperty('--el-color-primary', '#722ed1')
 
-// 切换暗色模式
+// 切换菜单圆角
+root.style.setProperty('--fizz-menu-item-radius', '0.5rem')
+
+// 主题模式仍通过 usePreferences 管理
+import { usePreferences } from '@fizz/layout'
+const { updatePreferences } = usePreferences()
 updatePreferences({
   theme: { mode: 'dark' },
 })`
@@ -218,7 +222,7 @@ const cssVarsTable = [
               v-for="r in radiusOptions"
               :key="r"
               class="theme-demo__radius-btn"
-              :class="{ 'is-active': preferences.theme.radius === r }"
+              :class="{ 'is-active': selectedRadius === r }"
               @click="applyRadius(r)"
             >
               {{ r || '0' }}
@@ -230,8 +234,8 @@ const cssVarsTable = [
         <div class="theme-demo__current">
           <div class="theme-demo__current-item">
             <span>主色调</span>
-            <span class="theme-demo__swatch" :style="{ background: preferences.theme.colorPrimary }" />
-            <code>{{ preferences.theme.colorPrimary }}</code>
+            <span class="theme-demo__swatch" :style="`background-color: ${customColor}`" />
+            <code>{{ customColor }}</code>
           </div>
           <div class="theme-demo__current-item">
             <span>色彩模式</span>
@@ -239,7 +243,7 @@ const cssVarsTable = [
           </div>
           <div class="theme-demo__current-item">
             <span>圆角</span>
-            <code>{{ preferences.theme.radius }}</code>
+            <code>{{ selectedRadius }}</code>
           </div>
         </div>
       </div>
@@ -296,7 +300,7 @@ const cssVarsTable = [
     <!-- CSS 变量速查表 -->
     <div>
       <h2>CSS 变量速查表</h2>
-      <p>以下是最常用的 <code>--fizz-*</code> CSS 变量。完整变量定义请参考 <code>@fizz/layout/theme-chalk/src/config/_css-vars.scss</code>。</p>
+      <p>以下是最常用的 <code>--fizz-*</code> CSS 变量。完整变量定义请参考 <code>@fizz/layout/theme-chalk/config/_css-vars.scss</code>。</p>
     </div>
     <DocPropsTable title="常用 CSS 变量" :data="cssVarsTable" />
 

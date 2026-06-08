@@ -69,7 +69,7 @@ function handleLogout() {
 </template>`
 
 const customMenuCode = `<script setup lang="ts">
-import type { UserDropdownMenuItem } from '@fizz-layout/components'
+import type { UserDropdownMenuItem } from '@fizz/layout/components'
 import IconDocument from '~icons/carbon/document'
 import IconHelp from '~icons/carbon/help'
 import IconLogout from '~icons/carbon/logout'

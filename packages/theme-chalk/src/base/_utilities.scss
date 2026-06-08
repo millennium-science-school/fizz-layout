@@ -68,22 +68,3 @@
 .#{$fizz-ns}-invisible {
   visibility: hidden !important;
 }
-
-// ========== 响应式隐藏 ==========
-@media (max-width: 767px) {
-  .#{$fizz-ns}-hidden-mobile {
-    display: none !important;
-  }
-}
-
-@media (min-width: 768px) {
-  .#{$fizz-ns}-hidden-desktop {
-    display: none !important;
-  }
-}
-
-@media (min-width: 1024px) {
-  .#{$fizz-ns}-show-lg {
-    display: flex !important;
-  }
-}

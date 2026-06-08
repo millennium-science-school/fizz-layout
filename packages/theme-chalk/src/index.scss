@@ -5,15 +5,15 @@
 // 目录结构：
 // ├── config/       配置层（变量、命名空间、CSS 变量）
 // ├── theme/        主题层（浅色/深色主题）
-// ├── mixins/       工具层（布局、响应式、组件 mixins）
+// ├── mixins/       工具层（布局、组件 mixins）
 // ├── base/         基础样式（重置、过渡、工具类）
 // ├── components/   组件样式（所有组件）
 // └── vendors/      第三方覆盖（Element Plus 等）
 //
 // 使用方式：
-// @use '@fizz-layout/theme-chalk-next' as *;
+// @use '@fizz/layout/theme-chalk' as *;
 // 或
-// @import '@fizz-layout/theme-chalk-next';
+// @import '@fizz/layout/theme-chalk';
 
 // 1. 配置层（CSS 变量定义）
 @use './config/index' as config;

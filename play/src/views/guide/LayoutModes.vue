@@ -10,10 +10,18 @@ function changeLayout(newLayout: string) {
   updatePreferences({ app: { layout: newLayout as any } })
 }
 
-const layoutModes = [
+const layoutModes = ['sidebar-nav', 'header-nav', 'mixed-nav'] as const
+
+const layoutModeLabels = {
+  'sidebar-nav': '侧边栏导航',
+  'header-nav': '顶部导航',
+  'mixed-nav': '混合导航',
+}
+
+const layoutModeDetails = [
   {
     key: 'sidebar-nav',
-    title: '侧边导航 sidebar-nav',
+    title: `${layoutModeLabels['sidebar-nav']} sidebar-nav`,
     desc: '经典的左右结构。侧边栏放置完整菜单树，顶栏放置面包屑和功能按钮。适合菜单层级较多的中大型系统。',
     structure: `┌───────────────────────────┐
 │ Logo  │     Header        │
@@ -25,7 +33,7 @@ const layoutModes = [
   },
   {
     key: 'header-nav',
-    title: '顶部导航 header-nav',
+    title: `${layoutModeLabels['header-nav']} header-nav`,
     desc: '上下结构。菜单放置在顶栏中水平展示，适合菜单项较少的轻量应用。',
     structure: `┌──────────────────────────┐
 │  Logo    Menu    Actions │
@@ -37,7 +45,7 @@ const layoutModes = [
   },
   {
     key: 'mixed-nav',
-    title: '混合导航 mixed-nav',
+    title: `${layoutModeLabels['mixed-nav']} mixed-nav`,
     desc: '顶栏展示一级菜单，点击后侧边栏展示对应的二级菜单。适合一级菜单不多但子菜单较深的大型系统。',
     structure: `┌──────────────────────────┐
 │ Logo  一级菜单   Actions  │
@@ -91,17 +99,17 @@ const propsCode = `// FizzLayout 组件的布局相关 Props
       <div class="layout-switcher">
         <el-button
           v-for="mode in layoutModes"
-          :key="mode.key"
-          :type="layout === mode.key ? 'primary' : 'default'"
-          @click="changeLayout(mode.key)"
+          :key="mode"
+          :type="layout === mode ? 'primary' : 'default'"
+          @click="changeLayout(mode)"
         >
-          {{ mode.key }}
+          {{ mode }}
         </el-button>
       </div>
     </div>
 
     <!-- Mode Details -->
-    <div v-for="mode in layoutModes" :key="mode.key">
+    <div v-for="mode in layoutModeDetails" :key="mode.key">
       <h2>{{ mode.title }}</h2>
       <p>{{ mode.desc }}</p>
       <pre class="layout-structure">{{ mode.structure }}</pre>

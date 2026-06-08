@@ -1,4 +1,4 @@
-import type { ComputedRef } from 'vue'
+import type { ComputedRef, Ref } from 'vue'
 import type {
   RouteLocationNormalized,
   Router,
@@ -7,10 +7,50 @@ import type {
 import type { TabDefinition } from '../types'
 import { createGlobalState, useStorage } from '@vueuse/core'
 import { computed, ref, shallowRef } from 'vue'
-import { storageConfig } from './config'
+import { getFizzSessionStorage, markFizzStorageConfigUsed, storageConfig } from './config'
 import { usePreferencesStore } from './usePreferencesStore'
 
-const useTabsStore = createGlobalState(() => {
+interface TabsStore {
+  tabs: Ref<TabDefinition[]>
+  cachedTabs: Ref<Set<string>>
+  excludeCachedTabs: Ref<Set<string>>
+  menuList: Ref<string[]>
+  renderRouteView: Ref<boolean>
+  dragEndIndex: Ref<number>
+  updateTime: Ref<number>
+  affixTabs: ComputedRef<TabDefinition[]>
+  getTabs: ComputedRef<TabDefinition[]>
+  getCachedTabs: ComputedRef<string[]>
+  getExcludeCachedTabs: ComputedRef<string[]>
+  _bulkCloseByKeys: (keys: string[]) => Promise<void>
+  _close: (tab: TabDefinition) => void
+  _goToDefaultTab: (router: Router) => Promise<void>
+  _goToTab: (tab: TabDefinition, router: Router) => Promise<void>
+  addTab: (routeTab: TabDefinition) => TabDefinition
+  closeAllTabs: (router: Router) => Promise<void>
+  closeOtherTabs: (tab: TabDefinition) => Promise<void>
+  closeTab: (tab: TabDefinition, router: Router) => Promise<void>
+  closeTabByKey: (key: string, router: Router) => Promise<void>
+  getTabByKey: (key: string) => TabDefinition
+  openTabInNewWindow: (tab: TabDefinition, router?: Router) => void
+  pinTab: (tab: TabDefinition) => Promise<void>
+  refresh: (router: Router | string) => Promise<void>
+  refreshByName: (name: string) => Promise<void>
+  resetTabTitle: (tab: TabDefinition) => Promise<void>
+  setAffixTabs: (routes: RouteRecordNormalized[]) => void
+  setMenuList: (list: string[]) => void
+  setTabTitle: (tab: TabDefinition, title: ComputedRef<string> | string) => Promise<void>
+  setUpdateTime: () => void
+  sortTabs: (oldIndex: number, newIndex: number) => Promise<void>
+  toggleTabPin: (tab: TabDefinition) => Promise<void>
+  unpinTab: (tab: TabDefinition) => Promise<void>
+  updateCacheTabs: () => Promise<void>
+  reset: () => void
+}
+
+const useTabsStore: () => TabsStore = createGlobalState(() => {
+  markFizzStorageConfigUsed()
+
   const preferences = usePreferencesStore()
 
   /**
@@ -19,7 +59,7 @@ const useTabsStore = createGlobalState(() => {
    * - persist 为 false（默认）时，使用普通 ref，刷新后标签页重置
    */
   const tabs = preferences.tabs.value.persist
-    ? useStorage<TabDefinition[]>(storageConfig.tabsStorageKey, [], sessionStorage)
+    ? useStorage<TabDefinition[]>(storageConfig.tabsStorageKey, [], getFizzSessionStorage())
     : ref<TabDefinition[]>([])
 
   // persist 模式下，初始化时清理无效的 tab 数据（没有 meta 或 matched 为空的）
@@ -146,7 +186,8 @@ const useTabsStore = createGlobalState(() => {
         if (index !== -1)
           tabs.value.splice(index, 1)
       }
-      tabs.value.push(tab)
+      const currentTabs = tabs.value as TabDefinition[]
+      currentTabs.push(tab)
     }
     else {
       const currentTab = tabs.value[tabIndex]
@@ -249,19 +290,28 @@ const useTabsStore = createGlobalState(() => {
   }
 
   /**
-   * 在新窗口中打开标签页（待实现）
+   * 在新窗口中打开标签页
    * @param tab - 要打开的标签定义
+   * @param router - Vue Router 实例，用于解析 history/hash/base URL
    */
-  function openTabInNewWindow(tab: TabDefinition) {
+  function openTabInNewWindow(tab: TabDefinition, router?: Router) {
     const url = tab.fullPath || tab.path
     if (!url) {
       console.warn('Cannot open tab in new window: no path available')
       return
     }
-    // 构建完整 URL（支持 hash 路由）
-    const fullUrl = url.startsWith('/')
-      ? `${window.location.origin}${window.location.pathname}#${url}`
-      : url
+
+    let href = url
+    if (router) {
+      const routeLocation = {
+        path: tab.path,
+        query: tab.query || {},
+        params: tab.params || {},
+      }
+      href = router.resolve(routeLocation as any).href
+    }
+
+    const fullUrl = toAbsoluteUrl(href)
     window.open(fullUrl, '_blank')
   }
 
@@ -581,6 +631,18 @@ function routeToTab(route: RouteRecordNormalized) {
     path: route.path,
     key: getTabKey(route),
   } as TabDefinition
+}
+
+function toAbsoluteUrl(url: string) {
+  if (typeof window === 'undefined')
+    return url
+
+  try {
+    return new URL(url, window.location.href).toString()
+  }
+  catch {
+    return url
+  }
 }
 
 export { getTabKey, useTabsStore }

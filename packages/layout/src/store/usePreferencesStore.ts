@@ -3,7 +3,7 @@ import type { DeepPartial, LayoutPreferences } from '../types'
 import { useLocale } from '@fizz-layout/hooks'
 import { createGlobalState, useColorMode, usePreferredLanguages, useStorage } from '@vueuse/core'
 import { computed, readonly, ref, watch } from 'vue'
-import { storageConfig } from './config'
+import { getFizzLocalStorage, markFizzStorageConfigUsed, storageConfig } from './config'
 import { DEFAULT_PREFERENCES } from './defaultPreferences'
 
 /**
@@ -38,11 +38,13 @@ function deepMerge<T extends Record<string, any>>(target: T, source: DeepPartial
  * 使用 @vueuse/core 的 createGlobalState + useStorage 实现持久化
  */
 const usePreferencesStore = createGlobalState(() => {
+  markFizzStorageConfigUsed()
+
   // 持久化存储
   const storedPreferences = useStorage<LayoutPreferences>(
     storageConfig.storageKey,
     DEFAULT_PREFERENCES,
-    localStorage,
+    getFizzLocalStorage(),
     { mergeDefaults: true },
   )
 
@@ -165,7 +167,6 @@ const usePreferencesStore = createGlobalState(() => {
       isHeaderNav: current === 'header-nav',
       isMixedNav: current === 'mixed-nav',
       isSideNav: current === 'sidebar-nav',
-      isFullContent: current === 'full-content',
     }
   })
 

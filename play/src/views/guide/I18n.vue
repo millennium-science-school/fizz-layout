@@ -10,7 +10,7 @@ const vueSfcExt = '.vue'
 
 const setupCode = `// main.ts — 完整的国际化配置
 import { createLocaleAdapter } from '@fizz/layout'
-import { zhCN, enUS } from '@fizz-layout/locale'
+import { zhCN, enUS } from '@fizz/layout/locale'
 import ElementPlus from 'element-plus'
 import { createApp } from 'vue'
 import { createI18n } from 'vue-i18n'

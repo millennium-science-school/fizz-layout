@@ -1,4 +1,4 @@
-# @fizz-layout/theme-chalk-next
+# @fizz/layout theme-chalk
 
 Fizz Layout 组件库样式包
 
@@ -21,7 +21,6 @@ src/
 │
 ├── mixins/                 # 工具层
 │   ├── _layout.scss        # 布局相关 mixins
-│   ├── _responsive.scss    # 响应式相关 mixins
 │   ├── _components.scss    # 组件相关 mixins
 │   └── _index.scss         # 工具层入口
 │
@@ -83,7 +82,6 @@ src/
 ### 4. Mixins 复用
 
 - 布局相关: flex-center, text-ellipsis 等
-- 响应式: screen-up, screen-down, mobile, desktop 等
 - 组件相关: button-base, widget-button, popup 等
 
 ## 使用方式
@@ -91,15 +89,15 @@ src/
 ### 全量引入
 
 ```scss
-@use '@fizz-layout/theme-chalk-next';
+@use '@fizz/layout/theme-chalk';
 ```
 
 ### 按需引入
 
 ```scss
 // 只引入配置和 mixins
-@use '@fizz-layout/theme-chalk-next/src/config/index' as config;
-@use '@fizz-layout/theme-chalk-next/src/mixins/index' as mixins;
+@use '@fizz/layout/theme-chalk/config/index' as config;
+@use '@fizz/layout/theme-chalk/mixins/index' as mixins;
 
 // 使用 mixins
 .my-component {

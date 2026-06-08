@@ -7,11 +7,17 @@
     "lib": ["ES2023", "DOM", "DOM.Iterable"],
     "skipLibCheck": true
   },
-  "include": ["packages"],
+  "include": [
+    "packages/**/*.ts",
+    "packages/**/*.tsx",
+    "packages/**/*.vue"
+  ],
   "exclude": [
     "node_modules",
     "**/dist",
     "**/__tests__/**/*",
+    "**/*.spec.ts",
+    "**/*.test.ts",
     "**/*.md"
   ]
 }

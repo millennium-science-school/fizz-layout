@@ -7,13 +7,13 @@ const vueSfcExt = '.vue'
 
 // Demo 组件内联源码（Phase 2 验证用）
 const installCode = `# 使用 pnpm
-pnpm add fizz-layout
+pnpm add @fizz/layout vue vue-router element-plus @vueuse/core @iconify/vue
 
 # 使用 npm
-npm install fizz-layout
+npm install @fizz/layout vue vue-router element-plus @vueuse/core @iconify/vue
 
 # 使用 yarn
-yarn add fizz-layout`
+yarn add @fizz/layout vue vue-router element-plus @vueuse/core @iconify/vue`
 
 const mainTsCode = `import { createLocaleAdapter } from '@fizz/layout'
 import { zhCN, enUS } from '@fizz/layout/locale'
@@ -25,7 +25,7 @@ import { router } from './router'
 
 import 'element-plus/dist/index.css'
 import 'element-plus/theme-chalk/dark/css-vars.css'
-import '@fizz/layout/theme-chalk/src/index.scss'
+import '@fizz/layout/index.css'
 
 const i18n = createI18n({
   legacy: false,
@@ -129,7 +129,7 @@ menus.generateFromRoutes(router.getRoutes())`
     <!-- Step 1 -->
     <div>
       <h2>Step 1：安装依赖</h2>
-      <p>使用你喜欢的包管理器安装 fizz-layout：</p>
+      <p>使用你喜欢的包管理器安装 <code>@fizz/layout</code>：</p>
       <DocCodeBlock :code="installCode" language="bash" />
     </div>
 

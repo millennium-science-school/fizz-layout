@@ -39,7 +39,7 @@ function useTabs() {
   }
 
   async function openTabInNewWindow(tab?: RouteLocationNormalized) {
-    await tabsStore.openTabInNewWindow(tab || route)
+    await tabsStore.openTabInNewWindow(tab || route, router)
   }
 
   async function closeTabByKey(key: string) {

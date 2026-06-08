@@ -5,14 +5,24 @@
     "allowJs": true
   },
   "include": [
-    "packages",
+    "packages/**/*.ts",
+    "packages/**/*.tsx",
+    "packages/**/*.vue",
     "packages/**/*.vue",
     "typings/global.d.ts",
     "typings/env.d.ts",
 
     // playground
     "play/main.ts",
+    "play/**/*.ts",
+    "play/**/*.tsx",
     "play/src/**/*",
     "play/**/*.vue"
+  ],
+  "exclude": [
+    "node_modules",
+    "**/dist",
+    "**/*.spec.ts",
+    "**/*.test.ts"
   ]
 }

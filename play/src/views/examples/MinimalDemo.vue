@@ -6,10 +6,11 @@ import DocTip from '../../components/DocTip.vue'
 const vueSfcExt = '.vue'
 
 const step1Code = `# 安装依赖
-pnpm add @fizz/layout element-plus`
+pnpm add @fizz/layout vue vue-router element-plus @vueuse/core @iconify/vue`
 
 const step2MainCode = `// main.ts — 最小入口
-import { setupFizzLocale } from '@fizz/layout/hooks'
+import { setupFizzLocale } from '@fizz/layout'
+import { zhCN } from '@fizz/layout/locale'
 import ElementPlus from 'element-plus'
 import { createApp } from 'vue'
 import App from './App${vueSfcExt}'
@@ -17,12 +18,12 @@ import { router } from './router'
 
 import 'element-plus/dist/index.css'
 import 'element-plus/theme-chalk/dark/css-vars.css'
-import '@fizz/layout/theme-chalk/src/index.scss'
+import '@fizz/layout/index.css'
 
 createApp(App)
   .use(router)
   .use(ElementPlus)
-  .use(setupFizzLocale())  // 不依赖 vue-i18n 的轻量方案
+  .use(setupFizzLocale(zhCN))  // 不依赖 vue-i18n 的轻量方案
   .mount('#app')`
 
 const step3AppCode = `<!-- App.vue — 最小布局壳 -->
@@ -120,7 +121,7 @@ const fullMinimalCode = `// 完整文件数量统计：
 // ❌ FlNotification / FlUserDropdown / FlGlobalSearch（未使用，不打包）`
 
 const withI18nCode = `// 如果需要国际化，只需替换 setupFizzLocale 为 createLocaleAdapter
-import { createLocaleAdapter } from '@fizz/layout/hooks'
+import { createLocaleAdapter } from '@fizz/layout'
 import { createI18n } from 'vue-i18n'
 
 const i18n = createI18n({
@@ -145,8 +146,8 @@ const { updatePreferences } = usePreferences()
 updatePreferences({
   app: { layout: 'header-nav', name: 'My App' },
   sidebar: { width: 240 },
-  tabs: { styleType: 'card' },
-  theme: { mode: 'light', colorPrimary: '#722ed1' },
+  tabs: { showIcon: true },
+  theme: { mode: 'light' },
 })`
 </script>
 
@@ -166,7 +167,7 @@ updatePreferences({
     <!-- Step 2 -->
     <div>
       <h2>Step 2：入口文件</h2>
-      <p>使用 <code>setupFizzLocale()</code> 免去 vue-i18n 的配置。</p>
+      <p>使用 <code>setupFizzLocale(zhCN)</code> 免去 vue-i18n 的配置。</p>
     </div>
     <DocCodeBlock :code="step2MainCode" language="typescript" />
 
