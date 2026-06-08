@@ -96,9 +96,11 @@ const breadcrumbPrefsCode = `interface BreadcrumbPreferences {
 
 const footerPrefsCode = `interface FooterPreferences {
   /** 是否启用底栏 */
-  enable: boolean    // true
+  enable: boolean    // false
   /** 是否固定在底部 */
-  fixed: boolean     // true
+  fixed: boolean     // false
+  /** 底栏高度 */
+  height: number     // 36
 }`
 
 const logoPrefsCode = `interface LogoPreferences {
@@ -106,11 +108,17 @@ const logoPrefsCode = `interface LogoPreferences {
   enable: boolean  // true
   /** Logo 图片地址 */
   source: string   // 'fizz-layout 默认 logo'
+  /** 暗色主题 Logo 图片地址 */
+  sourceDark?: string
+  /** 图片适应方式 */
+  fit: 'contain' | 'cover' | 'fill' | 'none' | 'scale-down'
 }`
 
 const navigationPrefsCode = `interface NavigationPreferences {
   /** 手风琴模式（同级只展开一个） */
   accordion: boolean            // true
+  /** mixed-nav 下是否拆分顶栏/侧栏菜单 */
+  split: boolean                // true
   /** 导航样式类型 */
   styleType: NavigationStyleType  // 'rounded'
 }`
@@ -120,27 +128,35 @@ const tabsPrefsCode = `interface TabsPreferences {
   enable: boolean        // true
   /** 是否启用拖拽排序 */
   draggable: boolean     // true
-  /** 是否启用右键菜单 */
-  contextMenu: boolean   // true
+  /** 标签栏高度 */
+  height: number         // 38
   /** 是否启用 KeepAlive */
   keepAlive: boolean     // true
+  /** 最大打开数量，0 表示不限制 */
+  maxCount: number       // 0
+  /** 中键关闭标签 */
+  middleClickToClose: boolean // false
+  /** 是否持久化标签 */
+  persist: boolean       // false
   /** 是否显示图标 */
   showIcon: boolean      // true
+  /** 是否显示最大化按钮 */
+  showMaximize: boolean  // true
+  /** 是否显示更多菜单 */
+  showMore: boolean      // true
   /** 标签栏风格 */
   styleType: TabsStyleType  // 'chrome'
-  /** 最大缓存数量 */
-  cacheLimit: number     // 20
+  /** 是否支持滚轮切换 */
+  wheelable: boolean     // true
 }`
 
 const themePrefsCode = `interface ThemePreferences {
-  /** 内置主题名称 */
-  builtinType: string    // 'default'
   /** 色彩模式 */
   mode: ThemeModeType    // 'auto'
-  /** 主题色 */
-  colorPrimary: string   // '#1677ff'
-  /** 是否使用圆角 */
-  radius: string         // '0.5rem'
+  /** 浅色模式下 Header 是否使用半深色 */
+  semiDarkHeader: boolean
+  /** 浅色模式下 Sidebar 是否使用半深色 */
+  semiDarkSidebar: boolean
 }`
 
 const transitionPrefsCode = `interface TransitionPreferences {

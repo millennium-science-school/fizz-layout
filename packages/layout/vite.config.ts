@@ -39,7 +39,7 @@ const dtsOptions: PluginOptions = {
   /**
    * 手动设置排除路径的 glob
    */
-  exclude: ['**/vite.config.ts'],
+  exclude: ['**/vite.config.ts', '**/*.spec.ts', '**/*.test.ts'],
   /**
    * 是否将源码里的 .d.ts 文件复制到 `outDir`
    */

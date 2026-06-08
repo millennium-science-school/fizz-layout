@@ -1,4 +1,4 @@
-# @fizz-layout/theme-chalk-next
+# @fizz/layout theme-chalk
 
 Fizz Layout 组件库样式包
 
@@ -91,15 +91,15 @@ src/
 ### 全量引入
 
 ```scss
-@use '@fizz-layout/theme-chalk-next';
+@use '@fizz/layout/theme-chalk';
 ```
 
 ### 按需引入
 
 ```scss
 // 只引入配置和 mixins
-@use '@fizz-layout/theme-chalk-next/src/config/index' as config;
-@use '@fizz-layout/theme-chalk-next/src/mixins/index' as mixins;
+@use '@fizz/layout/theme-chalk/config/index' as config;
+@use '@fizz/layout/theme-chalk/mixins/index' as mixins;
 
 // 使用 mixins
 .my-component {

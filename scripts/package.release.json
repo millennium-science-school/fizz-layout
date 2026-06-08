@@ -1,7 +1,7 @@
 {
   "name": "@fizz/layout",
   "type": "module",
-  "version": "0.1.5",
+  "version": "0.1.6",
   "description": "Fizz Layout - A flexible Vue 3 layout component library",
   "author": "kanocence",
   "license": "MIT",
@@ -33,7 +33,17 @@
       "types": "./types/locale/index.d.ts",
       "import": "./locale/index.mjs"
     },
+    "./hooks": {
+      "types": "./types/hooks/src/index.d.ts",
+      "import": "./es/index.mjs"
+    },
+    "./components": {
+      "types": "./types/components/index.d.ts",
+      "import": "./es/index.mjs"
+    },
     "./index.css": "./es/index.css",
+    "./style.css": "./es/index.css",
+    "./theme-chalk": "./theme-chalk/index.scss",
     "./es/*": "./es/*",
     "./types/*": "./types/*",
     "./locale/*": "./locale/*",

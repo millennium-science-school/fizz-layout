@@ -19,6 +19,17 @@ pnpm install
 pnpm dev
 ```
 
+## 📦 Usage
+
+```bash
+pnpm add @fizz/layout vue vue-router element-plus @vueuse/core @iconify/vue
+```
+
+```ts
+import { FizzLayout } from '@fizz/layout'
+import '@fizz/layout/index.css'
+```
+
 ## 📦 Build & Publish
 
 1. edit version in `/scripts/package.release.json`

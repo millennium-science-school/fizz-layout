@@ -1,4 +1,4 @@
-import type { ComputedRef } from 'vue'
+import type { ComputedRef, Ref } from 'vue'
 import type {
   RouteLocationNormalized,
   Router,
@@ -10,7 +10,45 @@ import { computed, ref, shallowRef } from 'vue'
 import { getFizzSessionStorage, markFizzStorageConfigUsed, storageConfig } from './config'
 import { usePreferencesStore } from './usePreferencesStore'
 
-const useTabsStore = createGlobalState(() => {
+interface TabsStore {
+  tabs: Ref<TabDefinition[]>
+  cachedTabs: Ref<Set<string>>
+  excludeCachedTabs: Ref<Set<string>>
+  menuList: Ref<string[]>
+  renderRouteView: Ref<boolean>
+  dragEndIndex: Ref<number>
+  updateTime: Ref<number>
+  affixTabs: ComputedRef<TabDefinition[]>
+  getTabs: ComputedRef<TabDefinition[]>
+  getCachedTabs: ComputedRef<string[]>
+  getExcludeCachedTabs: ComputedRef<string[]>
+  _bulkCloseByKeys: (keys: string[]) => Promise<void>
+  _close: (tab: TabDefinition) => void
+  _goToDefaultTab: (router: Router) => Promise<void>
+  _goToTab: (tab: TabDefinition, router: Router) => Promise<void>
+  addTab: (routeTab: TabDefinition) => TabDefinition
+  closeAllTabs: (router: Router) => Promise<void>
+  closeOtherTabs: (tab: TabDefinition) => Promise<void>
+  closeTab: (tab: TabDefinition, router: Router) => Promise<void>
+  closeTabByKey: (key: string, router: Router) => Promise<void>
+  getTabByKey: (key: string) => TabDefinition
+  openTabInNewWindow: (tab: TabDefinition, router?: Router) => void
+  pinTab: (tab: TabDefinition) => Promise<void>
+  refresh: (router: Router | string) => Promise<void>
+  refreshByName: (name: string) => Promise<void>
+  resetTabTitle: (tab: TabDefinition) => Promise<void>
+  setAffixTabs: (routes: RouteRecordNormalized[]) => void
+  setMenuList: (list: string[]) => void
+  setTabTitle: (tab: TabDefinition, title: ComputedRef<string> | string) => Promise<void>
+  setUpdateTime: () => void
+  sortTabs: (oldIndex: number, newIndex: number) => Promise<void>
+  toggleTabPin: (tab: TabDefinition) => Promise<void>
+  unpinTab: (tab: TabDefinition) => Promise<void>
+  updateCacheTabs: () => Promise<void>
+  reset: () => void
+}
+
+const useTabsStore: () => TabsStore = createGlobalState(() => {
   markFizzStorageConfigUsed()
 
   const preferences = usePreferencesStore()
@@ -148,7 +186,8 @@ const useTabsStore = createGlobalState(() => {
         if (index !== -1)
           tabs.value.splice(index, 1)
       }
-      tabs.value.push(tab)
+      const currentTabs = tabs.value as TabDefinition[]
+      currentTabs.push(tab)
     }
     else {
       const currentTab = tabs.value[tabIndex]

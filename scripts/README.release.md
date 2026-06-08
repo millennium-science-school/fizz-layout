@@ -5,9 +5,9 @@ A flexible Vue 3 layout component library built with Element Plus.
 ## Installation
 
 ```bash
-npm install fizz-layout
+npm install @fizz/layout
 # or
-pnpm add fizz-layout
+pnpm add @fizz/layout
 ```
 
 ## Peer Dependencies
@@ -22,8 +22,8 @@ pnpm add vue-i18n
 
 ```vue
 <script setup>
-import { FizzLayout } from 'fizz-layout'
-import 'fizz-layout/style.css'
+import { FizzLayout } from '@fizz/layout'
+import '@fizz/layout/index.css'
 </script>
 
 <template>

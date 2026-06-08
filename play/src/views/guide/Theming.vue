@@ -86,7 +86,7 @@ $header-height: 56px;
 $sidebar-width: 240px;
 
 // 然后引入 theme-chalk
-@import '@fizz/layout/theme-chalk/src/index.scss';`
+@import '@fizz/layout/theme-chalk';`
 
 const cssVarsTable = [
   { name: '--el-color-primary', desc: '主色调', default: '#409eff' },

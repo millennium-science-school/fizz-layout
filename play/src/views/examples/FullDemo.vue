@@ -135,7 +135,7 @@ import { router } from './router'
 // 引入样式
 import 'element-plus/dist/index.css'
 import 'element-plus/theme-chalk/dark/css-vars.css'
-import '${fizzPackageName}/theme-chalk/src/index.scss'
+import '${fizzPackageName}/index.css'
 
 // 国际化
 const i18n = createI18n({

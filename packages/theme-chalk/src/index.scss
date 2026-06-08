@@ -11,9 +11,9 @@
 // └── vendors/      第三方覆盖（Element Plus 等）
 //
 // 使用方式：
-// @use '@fizz-layout/theme-chalk-next' as *;
+// @use '@fizz/layout/theme-chalk' as *;
 // 或
-// @import '@fizz-layout/theme-chalk-next';
+// @import '@fizz/layout/theme-chalk';
 
 // 1. 配置层（CSS 变量定义）
 @use './config/index' as config;
