@@ -17,7 +17,8 @@ import { FlTabs } from './components/tabs'
 
 import { layoutProps } from './layout.ts'
 import { usePreferencesStore } from './store/usePreferencesStore'
-import { findMenuByPath } from './utils/findMenuByPath'
+import { resolveLayoutState } from './utils/resolveLayoutState'
+import { getMixedHeaderMenus, getMixedSidebarMenus, resolveMixedRootPath as resolveMixedRootPathFromMenus } from './utils/resolveMixedNav'
 
 defineOptions({ name: 'FizzLayout' })
 
@@ -87,24 +88,18 @@ const activeMixedRootPath = ref<string>('')
 
 /** 获取一级菜单（去掉 children，用于 mixed-nav 模式的 Header） */
 const mixedHeaderMenus = computed<MenuItemType[]>(() => {
-  if (!layoutMode.value.isMixedNav) {
+  if (!layoutMode.value.isMixedNav)
     return headerMenus.value
-  }
-  // 只返回顶级菜单，去掉 children（在 Header 中不显示下拉）
-  return headerMenus.value.map(menu => ({
-    ...menu,
-    children: undefined,
-  }))
+
+  return getMixedHeaderMenus(headerMenus.value)
 })
 
 /** 获取侧边栏菜单（mixed-nav 模式下显示当前一级菜单的子菜单） */
 const mixedSidebarMenus = computed<MenuItemType[]>(() => {
-  if (!layoutMode.value.isMixedNav) {
+  if (!layoutMode.value.isMixedNav)
     return sidebarMenus.value
-  }
-  // 找到当前激活的一级菜单
-  const rootMenu = headerMenus.value.find(menu => menu.path === activeMixedRootPath.value)
-  return rootMenu?.children ?? []
+
+  return getMixedSidebarMenus(headerMenus.value, activeMixedRootPath.value)
 })
 
 /** mixed-nav 模式下侧边栏是否应该显示（有子菜单时显示） */
@@ -115,41 +110,9 @@ const mixedNavSidebarVisible = computed(() => {
   return mixedSidebarMenus.value.length > 0
 })
 
-/** 根据当前路由路径计算所属的一级菜单 */
-function findRootMenuPath(path: string | undefined): string {
-  if (!path)
-    return ''
-
-  const menu = findMenuByPath(headerMenus.value, path)
-  if (!menu)
-    return ''
-
-  // 如果有 parents，返回第一个（L1）；否则自己就是父级
-  if (menu.parents?.[0]) {
-    return menu.parents[0]
-  }
-
-  // parents 不存在时，手动查找包含该路径的父级菜单
-  const findParent = (menus: MenuItemType[]): string => {
-    for (const item of menus) {
-      if (item.children?.some(child => child.path === path)) {
-        return item.path ?? ''
-      }
-    }
-    return menu.path ?? ''
-  }
-
-  return findParent(headerMenus.value)
-}
-
-/** 获取可用的一级菜单路径（作为回退） */
-function getFallbackRootPath(): string {
-  return headerMenus.value.find(item => item.path)?.path ?? ''
-}
-
 /** 根据路径解析 mixed-nav 的根菜单，失败则回退 */
 function resolveMixedRootPath(path?: string): string {
-  return findRootMenuPath(path) || getFallbackRootPath()
+  return resolveMixedRootPathFromMenus(headerMenus.value, path)
 }
 
 // mixed-nav 模式下同步激活的一级菜单（监听路径/菜单/模式）
@@ -165,51 +128,24 @@ watch(
 
 // ========== 布局计算（合并相关逻辑，提高可读性） ==========
 const layoutComputed = computed(() => {
-  const { isHeaderNav, isMixedNav, isSideNav } = layoutMode.value
-  const { enable: sidebarEnable, hidden, width, collapsedShowTitle } = sidebar.value
-  const { enable: logoEnable } = logo.value
-
-  // 是否显示头部导航菜单
-  const showHeaderNav = isHeaderNav || isMixedNav
-
-  // 侧边栏是否可见（mixed-nav 模式下需要检查是否有子菜单）
-  const baseSidebarVisible = !isHeaderNav && sidebarEnable && !hidden
-  const sidebarVisible = baseSidebarVisible && (isMixedNav ? mixedNavSidebarVisible.value : true)
-
-  // sidebar-nav 模式：Logo 在侧边栏顶部
-  // header-nav / mixed-nav 模式：Logo 在 Header 左侧
-  const showSidebarLogo = logoEnable && isSideNav && sidebarVisible
-  const showHeaderLogo = logoEnable && !isSideNav
-
-  // 导航菜单是否使用圆角
-  const isMenuRounded = navigation.value.styleType === 'rounded'
-
-  // Logo 是否折叠
-  const logoCollapsed = sidebarCollapsed.value && !isHeaderNav && !isMixedNav
-
-  // Header Logo 样式（header-nav / mixed-nav 模式下 Logo 宽度与侧边栏宽度保持一致）
-  const logoWidth = logoCollapsed ? sidebar.value.collapseWidth : width
-  const headerLogoStyle = {
-    minWidth: `${logoWidth}px`,
-    width: `${logoWidth}px`,
-    borderRight: (sidebarVisible && !isSideNav) ? '1px solid var(--fizz-border-color-light)' : undefined,
-  }
-
-  // Logo 样式类
-  const logoClasses: string[] = []
-  if (collapsedShowTitle && sidebarCollapsed.value && !isMixedNav) {
-    logoClasses.push('fizz-layout-sidebar-logo--centered')
-  }
+  const state = resolveLayoutState({
+    layoutMode: layoutMode.value,
+    sidebar: sidebar.value,
+    logo: logo.value,
+    navigation: navigation.value,
+    sidebarCollapsed: sidebarCollapsed.value,
+    mixedNavSidebarVisible: mixedNavSidebarVisible.value,
+  })
 
   return {
-    showHeaderNav,
-    showHeaderLogo,
-    sidebarVisible,
-    showSidebarLogo,
-    isMenuRounded,
-    logoCollapsed,
-    headerLogoStyle,
-    logoClass: logoClasses.join(' '),
+    ...state,
+    headerLogoStyle: {
+      minWidth: `${state.logoWidth}px`,
+      width: `${state.logoWidth}px`,
+      borderRight: (state.sidebarVisible && !layoutMode.value.isSideNav)
+        ? '1px solid var(--fizz-border-color-light)'
+        : undefined,
+    },
   }
 })
 
