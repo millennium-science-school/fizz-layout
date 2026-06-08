@@ -60,49 +60,6 @@ const createMenusParamsProps = [
   { name: 'parentPath', type: 'string', description: '可选。父路径前缀，用于嵌套路由拼接' },
 ]
 
-// ========== findMenuByPath ==========
-const findMenuCode = `import { findMenuByPath, findRootMenuByPath } from '@fizz/layout'
-
-const menus = [/* 菜单树 */]
-
-// 在菜单树中查找指定路径的菜单项
-const menu = findMenuByPath(menus, '/system/user')
-// => { path: '/system/user', title: '用户管理', ... }
-
-// 查找路径所属的根级菜单
-const root = findRootMenuByPath(menus, '/system/user')
-// => { path: '/system', title: '系统管理', ... }`
-
-const findMenuParamsProps = [
-  { name: 'menus', type: 'MenuItem[]', description: '菜单树数据' },
-  { name: 'path', type: 'string', description: '要查找的路径' },
-]
-
-// ========== deepMerge ==========
-const deepMergeCode = `import { deepMerge } from '@fizz/layout'
-
-const target = {
-  app: { name: 'My App', layout: 'side-nav' },
-  sidebar: { collapsed: false, width: 210 },
-}
-
-const source = {
-  app: { layout: 'header-nav' },  // 仅更新 layout
-  sidebar: { width: 240 },        // 仅更新 width
-}
-
-const result = deepMerge(target, source)
-// => {
-//   app: { name: 'My App', layout: 'header-nav' },
-//   sidebar: { collapsed: false, width: 240 },
-// }
-// 注意：这是深度合并，不是浅层 Object.assign`
-
-const deepMergeParamsProps = [
-  { name: 'target', type: 'Record<string, any>', description: '目标对象（会被修改并返回）' },
-  { name: 'source', type: 'Record<string, any>', description: '源对象，其属性将深度合并到 target 中' },
-]
-
 // ========== createLocaleAdapter ==========
 const createLocaleAdapterDetailCode = `import { createLocaleAdapter, setupFizzLocale } from '@fizz/layout/hooks'
 
@@ -145,7 +102,7 @@ const setupFizzLocaleParamsProps = [
 </script>
 
 <template>
-  <DocSection title="工具函数" description="createMenus / findMenuByPath / deepMerge / createLocaleAdapter / setupFizzLocale 工具函数参考">
+  <DocSection title="工具函数" description="createMenus / createLocaleAdapter / setupFizzLocale 工具函数参考">
     <!-- createMenus -->
     <div>
       <h2>createMenus</h2>
@@ -170,32 +127,6 @@ const setupFizzLocaleParamsProps = [
     <DocTip type="tip">
       <code>createMenus</code> 与 <code>useMenuAdapter</code> 的区别：前者是纯函数，后者是响应式 Hook。
       大多数场景推荐使用 <code>useMenuAdapter</code>，它内部调用了 <code>createMenus</code>。
-    </DocTip>
-
-    <!-- findMenuByPath -->
-    <div>
-      <h2>findMenuByPath / findRootMenuByPath</h2>
-      <p>在菜单树中根据路径查找菜单项。<code>findMenuByPath</code> 查找精确匹配，<code>findRootMenuByPath</code> 查找所属的根级菜单。</p>
-    </div>
-
-    <DocCodeBlock :code="findMenuCode" language="typescript" />
-    <DocPropsTable title="参数" :data="findMenuParamsProps" />
-
-    <!-- deepMerge -->
-    <div>
-      <h2>deepMerge</h2>
-      <p>
-        深度合并两个对象。与 <code>Object.assign</code> 不同，它会递归合并嵌套对象而不是直接覆盖。
-        主要用于偏好更新场景。
-      </p>
-    </div>
-
-    <DocCodeBlock :code="deepMergeCode" language="typescript" />
-    <DocPropsTable title="参数" :data="deepMergeParamsProps" />
-
-    <DocTip type="warning">
-      <code>deepMerge</code> 会直接修改 <code>target</code> 对象。如需不可变操作，请先克隆：
-      <code>deepMerge({ ...target }, source)</code>
     </DocTip>
 
     <!-- createLocaleAdapter / setupFizzLocale -->

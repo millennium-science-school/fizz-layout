@@ -1,46 +1,51 @@
 # Fizz Layout
 
-[![code style](https://antfu.me/badge-code-style.svg)](https://github.com/antfu/eslint-config)
+Fizz Layout is a desktop Vue 3 admin layout component library. It provides layout modes, navigation, tabs, breadcrumb, theme controls, notifications, global search, i18n integration, and theme-chalk styles for management applications.
 
-一个灵活的 Vue 3 布局组件库，面向后台管理场景，内置导航、标签页、面包屑、主题切换、通知、全局搜索等常用能力。
+## Features
 
-## ✨ Features
+- Desktop admin layout shell for Vue 3.
+- Three layout modes: `sidebar-nav`, `header-nav`, and `mixed-nav`.
+- Router-friendly menus, breadcrumbs, tabs, and preferences.
+- Built-in components for search, theme mode, fullscreen, notifications, language switching, and user menus.
+- Theme styles through `@fizz/layout/index.css` and `@fizz/layout/theme-chalk`.
 
-- 三种布局模式：`sidebar-nav` / `header-nav` / `mixed-nav`
-- 菜单联动、标签页与偏好设置（可持久化）
-- 组件齐全：全局搜索、主题切换、全屏、通知、语言切换、用户下拉等
-- i18n 友好：内置中英文 locale，可与 `vue-i18n` 直接合并
-- 主题与样式：提供可配置的 `theme-chalk` SCSS
+## Install
 
-## 🚀 Dev
+```bash
+pnpm add @fizz/layout vue vue-router element-plus @vueuse/core @iconify/vue
+```
+
+## Usage
+
+```ts
+import { FizzLayout } from '@fizz/layout'
+
+import 'element-plus/dist/index.css'
+import 'element-plus/theme-chalk/dark/css-vars.css'
+import '@fizz/layout/index.css'
+```
+
+## Public Imports
+
+```ts
+import { FizzLayout, usePreferences } from '@fizz/layout'
+import { zhCN, enUS } from '@fizz/layout/locale'
+import { useLocale } from '@fizz/layout/hooks'
+import type { MenuItemType } from '@fizz/layout/components'
+import '@fizz/layout/theme-chalk'
+```
+
+## Development
 
 ```bash
 pnpm install
 pnpm dev
 ```
 
-## 📦 Usage
-
-```bash
-pnpm add @fizz/layout vue vue-router element-plus @vueuse/core @iconify/vue
-```
-
-```ts
-import { FizzLayout } from '@fizz/layout'
-import '@fizz/layout/index.css'
-```
-
-## 📦 Build & Publish
-
-1. edit version in `/scripts/package.release.json`
-2. run build command
+## Build
 
 ```bash
 pnpm build
-```
-
-3. run publish command
-
-```bash
-cd dist && pnpm publish
+pnpm -C play run build
 ```

@@ -49,7 +49,7 @@ function handleAllRead(type: string) {
 // ========== 代码示例 ==========
 const basicCode = `<script setup lang="ts">
 import { FlNotification } from '@fizz/layout'
-import type { NotificationItem } from '@fizz-layout/components'
+import type { NotificationItem } from '@fizz/layout/components'
 
 const notifications = ref<NotificationItem[]>([
   { id: 1, title: '系统升级', message: '将于今晚维护', date: '2025-02-28', isRead: false },

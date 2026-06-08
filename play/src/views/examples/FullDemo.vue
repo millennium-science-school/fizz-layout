@@ -267,7 +267,7 @@ const menus = createMenus(backendMenus, router.getRoutes(), t)`
           </div>
           <div class="full-demo__buttons">
             <el-button
-              v-for="l in ['side-nav', 'header-nav', 'mixed-nav']"
+              v-for="l in ['sidebar-nav', 'header-nav', 'mixed-nav']"
               :key="l"
               :type="layout === l ? 'primary' : 'default'"
               @click="changeLayout(l)"
